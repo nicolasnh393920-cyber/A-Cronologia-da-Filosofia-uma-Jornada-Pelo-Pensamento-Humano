@@ -14,229 +14,121 @@
             padding: 0;
             box-sizing: border-box;
         }
-
         html {
             scroll-behavior: smooth;
         }
-
         body {
             font-family: 'Inter', sans-serif;
             background-color: #fafaf8;
             color: #1a1a1a;
             line-height: 1.6;
         }
-
-        /* HEADER */
         header {
-            background: linear-gradient(135deg, #6b4c9a 0%, #4a3570 100%);
+            background: linear-gradient(135deg, #1a1a1a 0%, #333 100%);
             color: white;
             padding: 1.5rem 2rem;
             text-align: center;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
         }
-
         header h1 {
             font-family: 'Libre Baskerville', serif;
             font-size: 2.5rem;
             margin-bottom: 0.5rem;
             font-weight: 700;
         }
-
-        header p {
-            font-size: 1.1rem;
-            opacity: 0.95;
-            font-weight: 300;
-        }
-
-        /* HERO SECTION */
         .hero {
-            background: linear-gradient(135deg, rgba(107, 76, 154, 0.95) 0%, rgba(74, 53, 112, 0.95) 100%), url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><defs><pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/></pattern></defs><rect width="1200" height="600" fill="url(%23grid)"/></svg>');
+            background: linear-gradient(135deg, rgba(26, 26, 26, 0.95) 0%, rgba(51, 51, 51, 0.95) 100%);
             color: white;
             padding: 5rem 2rem;
             text-align: center;
-            min-height: 500px;
+            min-height: 400px;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
         }
-
         .hero h2 {
             font-family: 'Libre Baskerville', serif;
-            font-size: 3.5rem;
+            font-size: 3rem;
             margin-bottom: 1rem;
             line-height: 1.2;
-            font-weight: 700;
         }
-
         .hero .subtitle {
-            font-size: 1.4rem;
+            font-size: 1.3rem;
             margin-bottom: 1.5rem;
             opacity: 0.9;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
         }
-
         .hero .description {
             font-size: 1.1rem;
-            max-width: 800px;
+            max-width: 700px;
             margin: 0 auto 2rem;
             opacity: 0.85;
-            line-height: 1.8;
         }
-
-        .hero .author {
-            font-size: 1rem;
-            opacity: 0.8;
-            margin-bottom: 1rem;
-            font-style: italic;
-        }
-
-        .hero .badge {
-            display: inline-block;
-            background: rgba(212, 175, 55, 0.3);
-            border: 2px solid #d4af37;
-            color: #ffd700;
-            padding: 0.7rem 1.5rem;
-            border-radius: 50px;
-            font-weight: 600;
-            margin-top: 1rem;
-        }
-
-        /* BENEFITS SECTION */
         .benefits {
-            padding: 5rem 2rem;
-            background-color: #fafaf8;
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
         }
-
         .benefits h3 {
             font-family: 'Libre Baskerville', serif;
-            text-align: center;
-            font-size: 2.5rem;
+            font-size: 2.2rem;
             margin-bottom: 3rem;
-            color: #6b4c9a;
+            color: #1a1a1a;
         }
-
         .benefits-container {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2.5rem;
-            max-width: 1200px;
-            margin: 0 auto;
+            gap: 2rem;
         }
-
         .benefit-card {
             background: white;
             border-radius: 12px;
-            padding: 2.5rem;
-            text-align: center;
+            padding: 2.5rem 2rem;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-            transition: all 0.3s ease;
-            border-top: 4px solid #6b4c9a;
+            transition: transform 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            border-top: 4px solid #d4af37;
         }
-
         .benefit-card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 12px 35px rgba(107, 76, 154, 0.15);
         }
-
-        .benefit-card.combo {
-            border-top-color: #d4af37;
-            background: linear-gradient(135deg, #fafaf8 0%, #f5f1ff 100%);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .benefit-card.combo::before {
-            content: "MELHOR OFERTA";
-            position: absolute;
-            top: -35px;
-            right: -45px;
-            background: #d4af37;
-            color: #1a1a1a;
-            padding: 0.5rem 4rem;
-            transform: rotate(45deg);
-            font-weight: 700;
-            font-size: 0.85rem;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-        }
-
         .benefit-icon {
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
         }
-
         .benefit-card h4 {
             font-family: 'Libre Baskerville', serif;
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             margin-bottom: 1rem;
             color: #1a1a1a;
         }
-
-        .benefit-card .price {
-            font-size: 2.2rem;
-            font-weight: 700;
-            color: #6b4c9a;
-            margin: 1rem 0;
-        }
-
-        .benefit-card.combo .price {
+        .price {
+            font-size: 2rem;
+            font-weight: 800;
             color: #d4af37;
+            margin-bottom: 1.5rem;
         }
-
         .benefit-list {
-            text-align: left;
-            margin: 1.5rem 0;
-        }
-
-        .benefit-list li {
             list-style: none;
-            padding: 0.6rem 0;
+            text-align: left;
+            margin-bottom: 2rem;
+            flex-grow: 1;
+        }
+        .benefit-list li {
+            padding: 0.5rem 0;
             color: #4a4a4a;
-            font-size: 0.95rem;
-            border-bottom: 1px solid #e8e8e6;
+            border-bottom: 1px solid #eee;
         }
-
-        .benefit-list li:last-child {
-            border-bottom: none;
-        }
-
         .benefit-list li::before {
             content: "✓ ";
-            color: #6b4c9a;
-            font-weight: 700;
-            margin-right: 0.5rem;
-        }
-
-        .benefit-card.combo .benefit-list li::before {
             color: #d4af37;
+            font-weight: bold;
         }
-
-        /* CTA SECTION */
-        .cta-section {
-            padding: 4rem 2rem;
-            background: linear-gradient(135deg, #6b4c9a 0%, #4a3570 100%);
-            text-align: center;
-        }
-
-        .cta-section h3 {
-            font-family: 'Libre Baskerville', serif;
-            font-size: 2.2rem;
-            color: white;
-            margin-bottom: 2.5rem;
-        }
-
-        .buttons-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-
         .btn {
-            padding: 1.2rem 2rem;
+            display: inline-block;
+            padding: 1rem 2rem;
             font-size: 1.1rem;
             font-weight: 700;
             border: none;
@@ -244,234 +136,66 @@
             cursor: pointer;
             transition: all 0.3s ease;
             text-decoration: none;
-            display: inline-block;
-            text-align: center;
             font-family: 'Inter', sans-serif;
         }
-
-        .btn-pdf {
-            background-color: #4a90e2;
-            color: white;
-        }
-
-        .btn-pdf:hover {
-            background-color: #357abd;
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(74, 144, 226, 0.3);
-        }
-
-        .btn-html {
-            background-color: #9d7ec8;
-            color: white;
-        }
-
-        .btn-html:hover {
-            background-color: #7d5fa8;
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(157, 126, 200, 0.3);
-        }
-
-        .btn-combo {
-            background-color: #d4af37;
-            color: #1a1a1a;
-            font-size: 1.2rem;
-            padding: 1.4rem 2.5rem;
-            grid-column: 1 / -1;
-            max-width: 400px;
-            margin: 0 auto;
-        }
-
-        .btn-combo:hover {
-            background-color: #e8c547;
-            transform: translateY(-3px);
-            box-shadow: 0 12px 30px rgba(212, 175, 55, 0.4);
-        }
-
-        /* FOOTER */
-        footer {
+        .btn-pdf { background-color: #4a90e2; color: white; }
+        .btn-html { background-color: #9d7ec8; color: white; }
+        .btn-combo { background-color: #d4af37; color: #1a1a1a; }
+        .btn:hover { opacity: 0.9; transform: scale(1.05); }
+        
+        .cta-section {
             background-color: #1a1a1a;
-            color: #c0c0c0;
-            padding: 2rem;
+            color: white;
+            padding: 5rem 2rem;
             text-align: center;
-            font-size: 0.9rem;
         }
-
+        .cta-section h3 {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 2rem;
+            margin-bottom: 2rem;
+        }
+        .buttons-container {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+        footer {
+            background-color: #000;
+            color: #888;
+            padding: 3rem 2rem;
+            text-align: center;
+        }
         .footer-content {
             max-width: 1200px;
             margin: 0 auto;
         }
-
         .contact-info {
-            margin-bottom: 1.5rem;
+            margin-bottom: 2rem;
             display: flex;
-            flex-direction: column;
-            gap: 0.8rem;
-            align-items: center;
-        }
-
-        .contact-item {
-            display: flex;
-            align-items: center;
             justify-content: center;
-            gap: 0.5rem;
+            gap: 2rem;
+            flex-wrap: wrap;
         }
-
-        .contact-item a {
-            color: #d4af37;
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-
-        .contact-item a:hover {
-            color: #ffd700;
-        }
-
+        .contact-item a { color: #d4af37; text-decoration: none; }
         .social-links {
             display: flex;
             justify-content: center;
-            gap: 1.5rem;
-            margin-bottom: 1.5rem;
-            flex-wrap: wrap;
+            gap: 2rem;
+            margin-bottom: 2rem;
         }
-
-        .social-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            color: #d4af37;
-            text-decoration: none;
-            transition: all 0.3s;
-            font-weight: 600;
-        }
-
-        .social-link:hover {
-            color: #ffd700;
-            transform: translateY(-2px);
-        }
-
-        .social-icon {
-            font-size: 1.3rem;
-        }
-
-        .copyright {
-            border-top: 1px solid #333;
-            padding-top: 1rem;
-            margin-top: 1rem;
-            color: #888;
-        }
-
-        /* ANIMATIONS */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .benefit-card {
-            animation: fadeInUp 0.6s ease-out forwards;
-        }
-
-        .benefit-card:nth-child(1) {
-            animation-delay: 0.1s;
-        }
-
-        .benefit-card:nth-child(2) {
-            animation-delay: 0.2s;
-        }
-
-        .benefit-card:nth-child(3) {
-            animation-delay: 0.3s;
-        }
-
-        /* RESPONSIVE */
+        .social-link { color: white; text-decoration: none; display: flex; align-items: center; gap: 0.5rem; }
+        
         @media (max-width: 768px) {
-            header h1 {
-                font-size: 2rem;
-            }
-
-            .hero h2 {
-                font-size: 2.2rem;
-            }
-
-            .hero .subtitle {
-                font-size: 1.1rem;
-            }
-
-            .benefits h3 {
-                font-size: 2rem;
-            }
-
-            .benefit-card {
-                padding: 2rem;
-            }
-
-            .buttons-container {
-                grid-template-columns: 1fr;
-            }
-
-            .btn-combo {
-                grid-column: 1;
-            }
-
-            .contact-info {
-                flex-direction: column;
-            }
-
-            .social-links {
-                gap: 1rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            header h1 {
-                font-size: 1.5rem;
-            }
-
-            .hero h2 {
-                font-size: 1.8rem;
-            }
-
-            .hero {
-                padding: 3rem 1rem;
-            }
-
-            .benefits {
-                padding: 3rem 1rem;
-            }
-
-            .benefit-card h4 {
-                font-size: 1.5rem;
-            }
-
-            .benefit-card .price {
-                font-size: 1.8rem;
-            }
-
-            .btn {
-                padding: 1rem 1.5rem;
-                font-size: 1rem;
-            }
-
-            .btn-combo {
-                padding: 1.2rem 2rem;
-                font-size: 1.1rem;
-            }
+            .hero h2 { font-size: 2rem; }
+            .benefits-container { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
-    <!-- HEADER -->
     <header>
         <h1>A Cronologia da Filosofia</h1>
-        <p>Uma Jornada pelo Pensamento Humano</p>
     </header>
-
-    <!-- HERO SECTION -->
     <section class="hero">
         <h2>Explore 26 Séculos de Filosofia</h2>
         <p class="subtitle">De Sócrates ao Século XXI</p>
@@ -480,14 +204,10 @@
             Com 25 capítulos cuidadosamente elaborados, descubra como a filosofia moldou nosso mundo.
         </p>
         <p class="author">Autor: Nicolas H. de J. Silva</p>
-        <div class="badge">🎉 Agora disponível em duas versões!</div>
     </section>
-
-    <!-- BENEFITS SECTION -->
     <section class="benefits">
         <h3>Escolha Sua Forma de Aprender</h3>
         <div class="benefits-container">
-            <!-- PDF Card -->
             <div class="benefit-card">
                 <div class="benefit-icon">📄</div>
                 <h4>PDF Estático</h4>
@@ -496,14 +216,10 @@
                     <li>Leitura offline sem internet</li>
                     <li>Compatível com qualquer dispositivo</li>
                     <li>Formato universal e seguro</li>
-                    <li>Fácil de compartilhar</li>
-                    <li>Sem dependência de navegador</li>
                     <li>Ideal para leitura tradicional</li>
                 </ul>
-                <button class="btn btn-pdf" onclick="irParaPDF()">Comprar PDF</button>
+                <button class="btn btn-pdf" onclick="irParaPDF()">Ver Detalhes PDF</button>
             </div>
-
-            <!-- HTML Card -->
             <div class="benefit-card">
                 <div class="benefit-icon">🌐</div>
                 <h4>HTML Interativo</h4>
@@ -513,30 +229,23 @@
                     <li>Sumário interativo com navegação</li>
                     <li>Modo claro/escuro integrado</li>
                     <li>Barra de progresso de leitura</li>
-                    <li>Seções de reflexão expansíveis</li>
-                    <li>Glossário e bibliografia integrados</li>
                 </ul>
-                <button class="btn btn-html" onclick="irParaHTML()">Comprar HTML</button>
+                <button class="btn btn-html" onclick="irParaHTML()">Ver Detalhes HTML</button>
             </div>
-
-            <!-- COMBO Card -->
-            <div class="benefit-card combo">
+            <div class="benefit-card">
                 <div class="benefit-icon">🎁</div>
                 <h4>Combo Completo</h4>
                 <div class="price">R$ 34,90</div>
                 <ul class="benefit-list">
                     <li>✨ PDF + HTML (ambas versões)</li>
                     <li>✨ Máxima flexibilidade</li>
-                    <li>✨ Leia offline ou online</li>
                     <li>✨ Melhor custo-benefício</li>
-                    <li>✨ Economize R$ 11,90!</li>
+                    <li>✨ Economize R$ 10,90!</li>
                 </ul>
-                <button class="btn btn-combo" onclick="irParaCombo()">Comprar Combo</button>
+                <button class="btn btn-combo" onclick="irParaCombo()">Ver Detalhes Combo</button>
             </div>
         </div>
     </section>
-
-    <!-- CTA SECTION -->
     <section class="cta-section">
         <h3>Pronto para começar sua jornada filosófica?</h3>
         <div class="buttons-container">
@@ -545,44 +254,23 @@
             <button class="btn btn-combo" onclick="irParaCombo()">🎁 Combo - R$ 34,90</button>
         </div>
     </section>
-
-    <!-- FOOTER -->
     <footer>
         <div class="footer-content">
             <div class="contact-info">
-                <div class="contact-item">
-                    <span>📧</span>
-                    <a href="/cdn-cgi/l/email-protection#bad4d3d9d1c0d3d4d5cadfd4faddd7dbd3d694d9d5d7"><span class="__cf_email__" data-cfemail="c0aea9a3abbaa9aeafb0a5ae80a7ada1a9aceea3afad">[email&#160;protected]</span></a>
-                </div>
-                <div class="contact-item">
-                    <span>📱</span>
-                    <a href="https://wa.me/5511913668489" target="_blank">(11) 91366-8489</a>
-                </div>
+                <div class="contact-item">📧 <a href="mailto:nickzinopen@gmail.com">nickzinopen@gmail.com</a></div>
+                <div class="contact-item">📱 <a href="https://wa.me/5511913668489" target="_blank">(11) 91366-8489</a></div>
             </div>
-
             <div class="social-links">
-                <a href="https://instagram.com/nick.et.logos" target="_blank" class="social-link">
-                    <span class="social-icon">📷</span>
-                    <span>Instagram</span>
-                </a>
-                <a href="https://tiktok.com/@nick.et.logos" target="_blank" class="social-link">
-                    <span class="social-icon">🎵</span>
-                    <span>TikTok</span>
-                </a>
+                <a href="https://instagram.com/nick.et.logos" target="_blank" class="social-link">📷 Instagram</a>
+                <a href="https://tiktok.com/@nick.et.logos" target="_blank" class="social-link">🎵 TikTok</a>
             </div>
-
-            <div class="copyright">
-                © 2026 A Cronologia da Filosofia. Todos os direitos reservados.
-            </div>
+            <div class="copyright">© 2026 A Cronologia da Filosofia. Todos os direitos reservados.</div>
         </div>
     </footer>
-
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-        // Redirecionamentos para as páginas de produto
-        function irParaPDF() {
-            // Substitua pela URL da sua página PDF
-            window.location.href = 'pdf.html';
-        }
-
-        function irParaHTML() {
-            // Substitua pela URL da sua p�
+    <script>
+        function irParaPDF() { window.location.href = 'pdf.html'; }
+        function irParaHTML() { window.location.href = 'versao-interativa-vendas.html'; }
+        function irParaCombo() { window.location.href = 'combo.html'; }
+    </script>
+</body>
+</html>
