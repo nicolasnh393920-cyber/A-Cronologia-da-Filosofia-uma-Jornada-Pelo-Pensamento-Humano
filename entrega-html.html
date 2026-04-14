@@ -1,0 +1,2134 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Acesso à versão interativa de A Cronologia da Filosofia">
+    <title>Sua Compra - A Cronologia da Filosofia</title>
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital@0;1&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #fafaf8;
+            color: #1a1a1a;
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .delivery-page {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .delivery-page.hidden {
+            display: none;
+        }
+
+        .book-page {
+            display: none;
+        }
+
+        .book-page.active {
+            display: block;
+        }
+
+        .back-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background-color: #9d7ec8;
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 700;
+            z-index: 1000;
+            display: none;
+        }
+
+        .back-btn.show {
+            display: block;
+        }
+
+        .back-btn:hover {
+            background-color: #7d5fa8;
+        }
+
+        /* HEADER */
+        header {
+            background: linear-gradient(135deg, #9d7ec8 0%, #7d5fa8 100%);
+            color: white;
+            padding: 1.5rem 2rem;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        header p {
+            font-size: 1rem;
+            opacity: 0.95;
+            font-weight: 300;
+        }
+
+        /* MAIN CONTENT */
+        .container {
+            flex: 1;
+            padding: 4rem 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .success-card {
+            background: white;
+            border-radius: 12px;
+            padding: 3rem 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            border-top: 4px solid #9d7ec8;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .success-icon {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .success-card h2 {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 2.2rem;
+            color: #1a1a1a;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        .success-card p {
+            font-size: 1.1rem;
+            color: #4a4a4a;
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        .success-card .subtitle {
+            font-size: 1rem;
+            color: #666;
+            margin-bottom: 2rem;
+            font-style: italic;
+        }
+
+        /* CTA SECTION */
+        .cta-section {
+            background: linear-gradient(135deg, rgba(157, 126, 200, 0.1) 0%, rgba(125, 95, 168, 0.1) 100%);
+            border-radius: 12px;
+            padding: 2.5rem 2rem;
+            border: 2px solid #9d7ec8;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .cta-section h3 {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 1.8rem;
+            color: #1a1a1a;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background-color: #9d7ec8;
+            color: white;
+            padding: 1.5rem 3rem;
+            font-size: 1.3rem;
+            font-weight: 700;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .cta-button:hover {
+            background-color: #7d5fa8;
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(157, 126, 200, 0.4);
+        }
+
+        /* INFO BOX */
+        .info-box {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            border-left: 4px solid #9d7ec8;
+            margin-bottom: 2rem;
+        }
+
+        .info-box h4 {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 1.3rem;
+            color: #1a1a1a;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+        }
+
+        .info-box ul {
+            list-style: none;
+        }
+
+        .info-box li {
+            padding: 0.8rem 0;
+            color: #4a4a4a;
+            font-size: 1rem;
+            border-bottom: 1px solid #e8e8e6;
+        }
+
+        .info-box li:last-child {
+            border-bottom: none;
+        }
+
+        .info-box li::before {
+            content: "✓ ";
+            color: #9d7ec8;
+            font-weight: 700;
+            margin-right: 0.8rem;
+        }
+
+        .support-info {
+            background: #f5f1ff;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .support-info h5 {
+            font-size: 1rem;
+            color: #1a1a1a;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .support-info p {
+            font-size: 0.95rem;
+            color: #4a4a4a;
+            margin-bottom: 0.5rem;
+        }
+
+        .support-info a {
+            color: #9d7ec8;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        /* FOOTER */
+        footer {
+            background-color: #1a1a1a;
+            color: #c0c0c0;
+            padding: 2rem;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .contact-info {
+            margin-bottom: 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            align-items: center;
+        }
+
+        .contact-item a {
+            color: #9d7ec8;
+            text-decoration: none;
+        }
+
+        .copyright {
+            border-top: 1px solid #333;
+            padding-top: 1rem;
+            margin-top: 1rem;
+            color: #888;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2rem;
+            }
+
+            .container {
+                padding: 2rem 1rem;
+            }
+
+            .cta-button {
+                padding: 1.2rem 2rem;
+                font-size: 1.1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: 1.5rem;
+            }
+
+            .container {
+                padding: 1.5rem 1rem;
+            }
+
+            .success-icon {
+                font-size: 3rem;
+            }
+
+            .success-card h2 {
+                font-size: 1.5rem;
+            }
+
+            .cta-button {
+                padding: 1rem 1.5rem;
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="back-btn" id="backBtn" onclick="voltarParaEntrega()">← Voltar</button>
+
+    <div class="delivery-page" id="deliveryPage">
+        <header>
+            <h1>A Cronologia da Filosofia</h1>
+            <p>Sua Compra Confirmada ✓</p>
+        </header>
+
+        <div class="container">
+            <div class="success-card">
+                <div class="success-icon">🎉</div>
+                <h2>Bem-vindo!</h2>
+                <p>Obrigado por sua compra! Você agora tem acesso completo à versão interativa de <strong>A Cronologia da Filosofia</strong>.</p>
+                <p class="subtitle">Sua jornada pelo conhecimento começa aqui</p>
+            </div>
+
+            <div class="cta-section">
+                <h3>Acessar Seu Livro</h3>
+                <button onclick="abrirLivro()" class="cta-button">📖 Acessar Livro Interativo</button>
+            </div>
+
+            <div class="info-box">
+                <h4>O que você recebeu</h4>
+                <ul>
+                    <li>Versão HTML Interativa completa</li>
+                    <li>Menu responsivo e intuitivo</li>
+                    <li>Modo claro/escuro integrado</li>
+                    <li>Sumário navegável</li>
+                    <li>25 capítulos sobre a história da filosofia</li>
+                    <li>Glossário com 22 termos essenciais</li>
+                    <li>Bibliografia completa</li>
+                    <li>Acesso permanente</li>
+                </ul>
+
+                <div class="support-info">
+                    <h5>📧 Dúvidas?</h5>
+                    <p>Se encontrar qualquer problema ao acessar seu conteúdo, entre em contato conosco:</p>
+                    <p>📧 Email: <a href="mailto:nickzinopen@gmail.com">nickzinopen@gmail.com</a></p>
+                    <p>📱 WhatsApp: <a href="https://wa.me/5511913668489" target="_blank">(11) 91366-8489</a></p>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <div class="footer-content">
+                <div class="contact-info">
+                    <div>📧 <a href="mailto:nickzinopen@gmail.com">nickzinopen@gmail.com</a></div>
+                    <div>📱 <a href="https://wa.me/5511913668489" target="_blank">(11) 91366-8489</a></div>
+                </div>
+                <div class="copyright">
+                    © 2026 A Cronologia da Filosofia. Todos os direitos reservados.
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <div class="book-page" id="bookPage">
+        
+    <div class="progress-bar" id="progressBar"></div>
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <header>
+        <div class="header-left">
+            <button class="menu-toggle" id="menuToggle">☰</button>
+            <div class="header-title">A Cronologia da Filosofia</div>
+        </div>
+        <button class="theme-toggle" id="themeToggle">🌙</button>
+    </header>
+
+    <aside class="sidebar" id="sidebar">
+        <section class="sidebar-section">
+            <div class="sidebar-title">Antiguidade</div>
+            <a class="sidebar-link" onclick="showSection('content'); navigateToChapter('cap01')">01 • Pré-Socráticos</a>
+            <a class="sidebar-link" onclick="showSection('content'); navigateToChapter('cap02')">02 • Sócrates</a>
+            <a class="sidebar-link" onclick="showSection('content'); navigateToChapter('cap03')">03 • Platão</a>
+            <a class="sidebar-link" onclick="showSection('content'); navigateToChapter('cap04')">04 • Aristóteles</a>
+            <a class="sidebar-link" onclick="showSection('content'); navigateToChapter('cap05')">05 • Estoicos</a>
+        </section>
+
+        <section class="sidebar-section">
+            <div class="sidebar-title">Idade Média</div>
+            <a class="sidebar-link" onclick="showSection('content'); navigateToChapter('cap06')">06 • Santo Agostinho</a>
+            <a class="sidebar-link" onclick="showSection('content'); navigateToChapter('cap07')">07 • São Tomás</a>
+        </section>
+
+        <section class="sidebar-section">
+            <div class="sidebar-title">Modernidade</div>
+            <a class="sidebar-link" onclick="showSection('content'); navigateToChapter('cap08')">08 • Renascimento</a>
+            <a class="sidebar-link" onclick="showSection('content'); navigateToChapter('cap09')">09 • Descartes</a>
+            <a class="sidebar-link" onclick="showSection('content'); navigateToChapter('cap10')">10 • Empirismo</a>
+            <a class="sidebar-link" onclick="showSection('content'); navigateToChapter('cap11')">11 • Contrato Social</a>
+            <a class="sidebar-link" onclick="showSection('content'); navigateToChapter('cap12')">12 • Iluminismo</a>
+        </section>
+
+        <section class="sidebar-section">
+            <div class="sidebar-title">Idealismo</div>
+            <a class="sidebar-link" onclick="showSection('content'); navigateToChapter('cap13')">13 • Kant</a>
+            <a class="sidebar-link" onclick="showSection('content'); navigateToChapter('cap14')">14 • Hegel</a>
+            <a class="sidebar-link" onclick="showSection('content'); navigateToChapter('cap15')">15 • Marx</a>
+        </section>
+
+        <section class="sidebar-section">
+            <div class="sidebar-title">Contemporânea</div>
+            <a class="sidebar-link" onclick="showSection('content'); navigateToChapter('cap16')">16 • Nietzsche</a>
+            <a class="sidebar-link" onclick="showSection('content'); navigateToChapter('cap17')">17 • Pragmatismo</a>
+            <a class="sidebar-link" onclick="showSection('content'); navigateToChapter('cap18')">18 • Existencialismo</a>
+            <a class="sidebar-link" onclick="showSection('content'); navigateToChapter('cap19')">19 • Wittgenstein</a>
+            <a class="sidebar-link" onclick="showSection('content'); navigateToChapter('cap20')">20 • Frankfurt</a>
+            <a class="sidebar-link" onclick="showSection('content'); navigateToChapter('cap21')">21 • Habermas</a>
+            <a class="sidebar-link" onclick="showSection('content'); navigateToChapter('cap22')">22 • Foucault</a>
+            <a class="sidebar-link" onclick="showSection('content'); navigateToChapter('cap23')">23 • Bauman</a>
+        </section>
+
+        <section class="sidebar-section">
+            <div class="sidebar-title">Era Digital</div>
+            <a class="sidebar-link" onclick="showSection('content'); navigateToChapter('cap24')">24 • Pós-Modernidade</a>
+            <a class="sidebar-link" onclick="showSection('content'); navigateToChapter('cap25')">25 • O Futuro</a>
+        </section>
+
+        <section class="sidebar-section">
+            <div class="sidebar-title">Recursos</div>
+            <a class="sidebar-link" onclick="showSection('glossary')">📚 Glossário</a>
+            <a class="sidebar-link" onclick="showSection('bibliography')">📖 Bibliografia</a>
+        </section>
+    </aside>
+
+    <main id="content">
+        <div class="hero">
+            <h1>A Cronologia da Filosofia</h1>
+            <p class="subtitle">Uma Jornada pelo Pensamento Humano</p>
+            <p style="font-size: 1rem; color: var(--accent); margin-bottom: 2rem; font-weight: 500;">
+                Autor: Nicolas H. de J. Silva
+            </p>
+            <p style="font-size: 1.05rem; color: var(--secondary-text); max-width: 700px; margin: 2rem auto;">
+                Este livro convida você para uma jornada através de 26 séculos de pensamento. Explore as mentes brilhantes que moldaram como compreendemos o mundo. A filosofia é uma conversa viva e contínua.
+            </p>
+        </div>
+
+        <!-- NOVO SUMÁRIO -->
+        <div class="toc-container">
+            <div class="toc-title">📖 Sumário</div>
+            <div class="toc-grid">
+                <div>
+                    <a class="toc-item" onclick="navigateToChapter('cap01')">01 • Pré-Socráticos</a>
+                    <a class="toc-item" onclick="navigateToChapter('cap02')">02 • Sócrates</a>
+                    <a class="toc-item" onclick="navigateToChapter('cap03')">03 • Platão</a>
+                    <a class="toc-item" onclick="navigateToChapter('cap04')">04 • Aristóteles</a>
+                    <a class="toc-item" onclick="navigateToChapter('cap05')">05 • Estoicos</a>
+                    <a class="toc-item" onclick="navigateToChapter('cap06')">06 • Santo Agostinho</a>
+                    <a class="toc-item" onclick="navigateToChapter('cap07')">07 • São Tomás</a>
+                    <a class="toc-item" onclick="navigateToChapter('cap08')">08 • Renascimento</a>
+                    <a class="toc-item" onclick="navigateToChapter('cap09')">09 • Descartes</a>
+                </div>
+                <div>
+                    <a class="toc-item" onclick="navigateToChapter('cap10')">10 • Empirismo</a>
+                    <a class="toc-item" onclick="navigateToChapter('cap11')">11 • Contrato Social</a>
+                    <a class="toc-item" onclick="navigateToChapter('cap12')">12 • Iluminismo</a>
+                    <a class="toc-item" onclick="navigateToChapter('cap13')">13 • Kant</a>
+                    <a class="toc-item" onclick="navigateToChapter('cap14')">14 • Hegel</a>
+                    <a class="toc-item" onclick="navigateToChapter('cap15')">15 • Marx</a>
+                    <a class="toc-item" onclick="navigateToChapter('cap16')">16 • Nietzsche</a>
+                    <a class="toc-item" onclick="navigateToChapter('cap17')">17 • Pragmatismo</a>
+                    <a class="toc-item" onclick="navigateToChapter('cap18')">18 • Existencialismo</a>
+                </div>
+                <div>
+                    <a class="toc-item" onclick="navigateToChapter('cap19')">19 • Wittgenstein</a>
+                    <a class="toc-item" onclick="navigateToChapter('cap20')">20 • Frankfurt</a>
+                    <a class="toc-item" onclick="navigateToChapter('cap21')">21 • Habermas</a>
+                    <a class="toc-item" onclick="navigateToChapter('cap22')">22 • Foucault</a>
+                    <a class="toc-item" onclick="navigateToChapter('cap23')">23 • Bauman</a>
+                    <a class="toc-item" onclick="navigateToChapter('cap24')">24 • Pós-Modernidade</a>
+                    <a class="toc-item" onclick="navigateToChapter('cap25')">25 • O Futuro</a>
+                    <a class="toc-item" onclick="showSection('glossary')">📚 Glossário</a>
+                    <a class="toc-item" onclick="showSection('bibliography')">📖 Bibliografia</a>
+                </div>
+            </div>
+        </div>
+
+        <section id="cap01" class="chapter">
+            <div class="chapter-number">Capítulo 01 • Antiguidade</div>
+            <h2>O Despertar da Razão: Os Pré-Socráticos</h2>
+            <div class="chapter-meta">
+                <strong>Período:</strong> Século VI a.C. — Grécia Antiga
+            </div>
+            <div class="chapter-content">
+                <p>A história da filosofia ocidental começa com uma pergunta simples. No século VI a.C., na região da Jônia, um grupo de pensadores decidiu fazer algo revolucionário: explicar o mundo sem apelar para deuses ou mitos. Tales de Mileto foi o primeiro. Propôs que tudo que existe é feito de água.</p>
+                <p>Parece ingênuo, mas o gesto intelectual é o ponto decisivo: ele procurava um princípio único, natural e racional. Não invocava vontades divinas. Estava buscando uma arché—um princípio fundamental. Isso é revolução intelectual.</p>
+                <p>Seus sucessores discordaram da resposta, mas mantiveram a pergunta viva. Heráclito argumentava que nada permanecia estável. Tudo estava em fluxo constante. A realidade era mudança pura. Parmênides discordava radicalmente: o ser é imóvel, eterno, indivisível. A mudança? Pura ilusão.</p>
+                <p>Essa tensão entre mudança e permanência atravessará toda a filosofia. Os pré-socráticos não deixaram sistemas completos. Deixaram algo mais valioso: perguntas que ainda nos ocupam. E mostraram que a razão pode questionar o mundo sem invocar o sobrenatural.</p>
+            </div>
+            <div class="reflection-section">
+                <button class="reflection-header" onclick="toggleReflection(this)">
+                    💭 Desafio Filosófico <span class="reflection-icon">▼</span>
+                </button>
+                <div class="reflection-content">
+                    <div class="reflection-text">
+                        <strong>Para seu contexto:</strong> Se tudo está em mudança constante, como Heráclito sugeria, será que conseguimos conhecer algo de verdade? Ou todo conhecimento é temporário?
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="cap02" class="chapter">
+            <div class="chapter-number">Capítulo 02 • Antiguidade</div>
+            <h2>Sócrates: A Arte de Questionar</h2>
+            <div class="chapter-meta">
+                <strong>Período:</strong> 469–399 a.C. — Atenas
+            </div>
+            <div class="chapter-content">
+                <p>Sócrates nunca escreveu nada. Nunca publicou um livro. Nunca fundou uma escola formal. E no entanto, é impossível falar de filosofia sem ele. Por quê? Porque mudou fundamentalmente a forma como as pessoas pensam.</p>
+                <p>Ele passava pelo mercado de Atenas fazendo perguntas aparentemente simples: "O que é a coragem?" "O que é a justiça?" Mas quando as pessoas respondiam, ele revelava contradições que elas não viam. Isso irritava profundamente. Muito. Eventualmente, levou-o à morte.</p>
+                <p>O que Sócrates fazia era chamado maiêutica—a arte da parteira. Sua mãe era parteira. Assim como ela ajudava bebês a nascer, Sócrates ajudava ideias a nascer nas mentes das pessoas. Mas havia um problema: muitas vezes, o que nasciam eram contradições e confusões.</p>
+                <p>Sua morte é profundamente instrutiva. Condenado por impiedade e corrupção da juventude, poderia ter escapado. Mas Sócrates recusou. Havia vivido sob as leis de Atenas. Fugia seria traição absoluta. Escolheu beber a cicuta com serenidade. Tornou-se mártir da filosofia.</p>
+            </div>
+            <div class="reflection-section">
+                <button class="reflection-header" onclick="toggleReflection(this)">
+                    💭 Desafio Filosófico <span class="reflection-icon">▼</span>
+                </button>
+                <div class="reflection-content">
+                    <div class="reflection-text">
+                        <strong>Questão central:</strong> Quais são suas certezas sobre si mesmo que não resistiriam a questionamento profundo? Que crenças você nunca questionou?
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="cap03" class="chapter">
+            <div class="chapter-number">Capítulo 03 • Antiguidade</div>
+            <h2>Platão: O Mundo das Ideias</h2>
+            <div class="chapter-meta">
+                <strong>Período:</strong> 428–348 a.C. — Atenas
+            </div>
+            <div class="chapter-content">
+                <p>Platão era aluno de Sócrates e viu tudo: o questionamento, a ironia, a morte. Assim como seu mestre, não acreditava na escrita como meio de transmitir filosofia verdadeira. Mas, diferentemente de Sócrates, Platão escreveu. Muito. Deixou 35 diálogos que chegaram até nós praticamente inteiros.</p>
+                <p>Sua grande inovação foi revolucionária: existe um mundo além do que vemos. Não apenas além—bem além. Há o mundo sensível que percebemos. Mas há um mundo inteligível, composto de Formas—realidades eternas, imutáveis, perfeitas. A cadeira que você vê é cópia imperfeita. A verdadeira Cadeira existe em outro lugar.</p>
+                <p>A Alegoria da Caverna é sua forma magistral de expressar isso. Imagine prisioneiros que só veem sombras na parede desde o nascimento. Quando um se liberta, enxerga primeiro as fogueiras, depois saem da caverna, veem objetos reais, e finalmente—o sol. Cada etapa é um tipo de conhecimento. A caverna é nosso mundo sensível. O exterior é o mundo das Formas.</p>
+                <p>Para Platão, o conhecimento verdadeiro vem apenas da razão, não dos sentidos. Os sentidos nos enganam. Sistematicamente. A razão liberta. Essa ideia influenciou toda a filosofia ocidental—Whitehead disse que toda a filosofia posterior é apenas "notas de rodapé a Platão".</p>
+            </div>
+            <div class="reflection-section">
+                <button class="reflection-header" onclick="toggleReflection(this)">
+                    💭 Desafio Filosófico <span class="reflection-icon">▼</span>
+                </button>
+                <div class="reflection-content">
+                    <div class="reflection-text">
+                        <strong>Provocação moderna:</strong> Se Platão está certo e o mundo que vemos é apenas "sombras", qual é a importância real de suas experiências vividas? De seu corpo? Suas emoções?
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="cap04" class="chapter">
+            <div class="chapter-number">Capítulo 04 • Antiguidade</div>
+            <h2>Aristóteles: A Realidade e o Equilíbrio</h2>
+            <div class="chapter-meta">
+                <strong>Período:</strong> 384–322 a.C. — Atenas e Macedônia
+            </div>
+            <div class="chapter-content">
+                <p>Aristóteles foi aluno de Platão. Estudou na Academia por quase vinte anos. Absorveu tudo. E depois? Discordou profundamente de quase tudo que seu mestre ensinava. Especialmente dessa ideia de um mundo separado de Formas invisíveis. Aristóteles era pragmático. Realista.</p>
+                <p>Para ele, não há mundo separado das Ideias esperando em outro lugar. Há apenas este mundo, o que vemos. A essência de uma coisa não existe em algum lugar transcendente—existe na coisa mesma. Uma estátua de mármore é composta de matéria (o mármore) e forma (a figura esculpida). Sem a forma, é só pedra bruta. Sem a matéria, a forma não existe em lugar algum.</p>
+                <p>Aristóteles foi o primeiro empirista real. Todo conhecimento começa pelos sentidos, argumentava. Você vê cadeiras diferentes. Através da repetição e da experiência acumulada, chega à ideia geral de "cadeira". A mente trabalha indo do particular para o universal. Não há mundo misterioso separado. É aqui, agora, visível.</p>
+                <p>Em ética, sua grande ideia é eudaimonia—florescimento humano completo. Não é prazer efêmero. É a realização da excelência que você possui como ser humano racional. A virtude é um hábito. Você desenvolve coragem praticando atos corajosos. Generosidade sendo generoso. Isso continua sendo profundamente verdadeiro.</p>
+            </div>
+            <div class="reflection-section">
+                <button class="reflection-header" onclick="toggleReflection(this)">
+                    💭 Desafio Filosófico <span class="reflection-icon">▼</span>
+                </button>
+                <div class="reflection-content">
+                    <div class="reflection-text">
+                        <strong>Pergunta prática:</strong> Se a virtude é um hábito desenvolvido pela prática, qual virtude você está realmente cultivando em sua vida agora? Que hábitos está desenvolvendo?
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="cap05" class="chapter">
+            <div class="chapter-number">Capítulo 05 • Antiguidade</div>
+            <h2>O Caminho da Felicidade: Estoicos e Epicuristas</h2>
+            <div class="chapter-meta">
+                <strong>Período:</strong> Séculos IV–I a.C. — Grécia e Roma
+            </div>
+            <div class="chapter-content">
+                <p>Após a morte de Alexandre Magno em 323 a.C., o mundo grego se fragmentou. As cidades-estados perderam importância. O indivíduo, antes integrado organicamente em sua comunidade, agora se via lançado em um império cosmopolita, instável e desconcertante. As certezas desapareceram. Nesse caos, surgiram três escolas que ofereciam algo prático: guias para viver bem apesar da incerteza.</p>
+                <p>Epicuro é frequentemente mal compreendido. Seu nome virou sinônimo de devassidão e excesso. A verdade é bem diferente. Epicuro buscava prazer—mas prazer verdadeiro e duradouro, não superficial. Para ele, os maiores prazeres eram simples: amizade genuína, filosofia, uma vida tranquila. O medo? Especialmente o medo da morte e dos deuses. Irracional completo. Se você está vivo, a morte não existe para você. Se estiver morto, você não saberá nada.</p>
+                <p>O Estoicismo oferecia outro caminho radicalmente diferente. Zenão de Cítio ensinava: há o que está verdadeiramente em seu poder—seus julgamentos, desejos, aversões—e o que não está—seu corpo, riqueza, reputação, morte. O sábio concentra toda energia no que controla e aceita serenamente, sem emoção, o que não controla. Isso não é resignação passiva. É clareza radical.</p>
+                <p>Você sofre não pelo que acontece, mas pela forma como julga o que acontece. Perder dinheiro é um evento externo. Seu sofrimento profundo vem do seu julgamento de que "isso é terrível". O estoico reexamina o julgamento—muda a perspectiva—e encontra paz.</p>
+            </div>
+            <div class="reflection-section">
+                <button class="reflection-header" onclick="toggleReflection(this)">
+                    💭 Desafio Filosófico <span class="reflection-icon">▼</span>
+                </button>
+                <div class="reflection-content">
+                    <div class="reflection-text">
+                        <strong>Exercício estoico:</strong> Pense em algo que o preocupa agora. O que está verdadeiramente em seu controle? O que não está? Como isso muda sua abordagem do problema?
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="cap06" class="chapter">
+            <div class="chapter-number">Capítulo 06 • Idade Média</div>
+            <h2>Santo Agostinho: Fé Encontra Razão</h2>
+            <div class="chapter-meta">
+                <strong>Período:</strong> 354–430 d.C. — Norte da África e Itália
+            </div>
+            <div class="chapter-content">
+                <p>O Império Romano caía em ruínas. O Cristianismo ascendia. A filosofia grega encontrava um novo mundo, um novo Deus. Santo Agostinho é a ponte histórica entre esses mundos. Sua vida foi uma jornada intensa: maniqueísmo, ceticismo acadêmico, neoplatonismo, e finalmente cristianismo. Ele registrou tudo com extraordinária profundidade psicológica em suas Confissões—talvez o primeiro relato introspectivo profundo jamais escrito.</p>
+                <p>Agostinho pensava constantemente: se Deus existe e é onipotente, de onde vem o mal? A resposta é surpreendente e sutil. O mal não é uma coisa em si. É ausência. Como a escuridão não é uma substância positiva, mas falta de luz, o mal é falta de bem. Você não escolhe fazer o mal por alguma força maligna independente. Escolhe porque sua vontade é imperfeita, defeituosa. Deus concedeu livre-arbítrio porque o amor coagido não é amor.</p>
+                <p>Ele também pensou sobre o tempo de forma incrivelmente moderna para o século IV. O passado? Existe como memória em você. O futuro? Como expectativa. O presente? Como atenção agora. O tempo não existe "lá fora" no universo como coisa objetiva. Existe em você, na sua consciência. Isso antecipa Husserl e Heidegger em mais de 1.500 anos.</p>
+                <p>Em A Cidade de Deus, Agostinho distingue duas cidades: a de Deus (fundada no amor a Deus até o desprezo de si) e a Terrena (fundada no amor a si até o desprezo de Deus). A história humana é essa tensão contínua. Somente no fim dos tempos se resolve definitivamente. Essa obra fundou a filosofia cristã da história.</p>
+            </div>
+            <div class="reflection-section">
+                <button class="reflection-header" onclick="toggleReflection(this)">
+                    💭 Desafio Filosófico <span class="reflection-icon">▼</span>
+                </button>
+                <div class="reflection-content">
+                    <div class="reflection-text">
+                        <strong>Sobre o tempo:</strong> Se o tempo existe apenas em você, na sua consciência, o que muda quando você dorme? O tempo passa para o resto do mundo enquanto você ausente?
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="cap07" class="chapter">
+            <div class="chapter-number">Capítulo 07 • Idade Média</div>
+            <h2>São Tomás de Aquino: A Escolástica</h2>
+            <div class="chapter-meta">
+                <strong>Período:</strong> 1225–1274 d.C. — Itália e França
+            </div>
+            <div class="chapter-content">
+                <p>No século XIII, os textos completos de Aristóteles reapareceram no Ocidente latino, trazidos por traduções árabes. Havia desaparecido praticamente da Europa durante séculos, mas sobreviveu nas universidades islâmicas. Quando seu retorno se tornou conhecido, criou uma crise intelectual imensa. Aristóteles era inegavelmente genial. Mas era pagão. Não conhecia Cristo. Como harmonizar sua filosofia rigorosa com o cristianismo?</p>
+                <p>São Tomás de Aquino enfrentou essa questão diretamente e ofereceu resposta revolucionária: não há conflito fundamental. A razão pode alcançar certas verdades por seus próprios meios—a existência de Deus, a imortalidade da alma. Outras verdades—a Trindade, a Encarnação do Verbo—dependem exclusivamente da revelação divina. Razão e fé não se contradizem. Se parecem contraditórias, é sinal de que entendemos uma delas erroneamente.</p>
+                <p>Tomás também desenvolveu a teoria da lei natural: há uma ordem moral inscrita na natureza humana, acessível à razão humana. Essa lei é universal e imutável, embora sua aplicação varie. A Igreja Católica adotou Tomás como seu filósofo oficial. Até hoje sua síntese permanece influente no pensamento cristão.</p>
+            </div>
+            <div class="reflection-section">
+                <button class="reflection-header" onclick="toggleReflection(this)">
+                    💭 Desafio Filosófico <span class="reflection-icon">▼</span>
+                </button>
+                <div class="reflection-content">
+                    <div class="reflection-text">
+                        <strong>Questão pessoal:</strong> Você vê conflito real entre razão científica e fé religiosa? Ou consegue, como Tomás, distinguir dois domínios legítimos que não competem?
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="cap08" class="chapter">
+            <div class="chapter-number">Capítulo 08 • Modernidade</div>
+            <h2>Renascimento: Maquiavel e o Poder</h2>
+            <div class="chapter-meta">
+                <strong>Período:</strong> Séculos XV–XVI — Itália e Europa
+            </div>
+            <div class="chapter-content">
+                <p>O Renascimento foi redescoberta profunda: dos clássicos gregos e romanos, da capacidade humana de moldar seu destino, da beleza do corpo e da mente. O foco da filosofia volta-se para o aqui e agora, para o mundo terreno, não para o além transcendente.</p>
+                <p>Nicolau Maquiavel serviu a república florentina como diplomata e secretário. Viu política de perto, de forma intensa: conspirações, alianças traíçoeiras, reviravoltas de poder. Quando caiu do poder, escreveu O Príncipe. É o livro mais honesto—e mais controverso—sobre poder político jamais escrito.</p>
+                <p>A tradição anterior oferecia "espelhos de príncipes"—manuais que aconselhavam os governantes a ser virtuosos segundo a moral cristã. Maquiavel olha para a realidade crua: príncipes que foram justos e virtuosos caíram. Príncipes que foram astutos e implacáveis floresceram e expandiram seus territórios. Logo, o príncipe deve aprender pragmaticamente "a não ser bom" quando a situação exige.</p>
+                <p>Isso é frequentemente mal interpretado. Maquiavel não era defensor da maldade. Descrevia o poder como ele funciona realmente, não como deveria funcionar em teoria. Separava política da moral religiosa—essa separação escandalizou contemporâneos, mas foi revolucionária. Criou espaço para a política ser analisada como campo de saber independente, com suas próprias lógicas.</p>
+            </div>
+            <div class="reflection-section">
+                <button class="reflection-header" onclick="toggleReflection(this)">
+                    💭 Desafio Filosófico <span class="reflection-icon">▼</span>
+                </button>
+                <div class="reflection-content">
+                    <div class="reflection-text">
+                        <strong>Questão incômoda:</strong> Maquiavel separou política de moralidade convencional. Você acha que isso é possível? Ou política e moral devem estar sempre ligadas?
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="cap09" class="chapter">
+            <div class="chapter-number">Capítulo 09 • Modernidade</div>
+            <h2>Descartes: A Lógica do Pensamento</h2>
+            <div class="chapter-meta">
+                <strong>Período:</strong> 1596–1650 — França e Holanda
+            </div>
+            <div class="chapter-content">
+                <p>René Descartes queria reconstruir todo o conhecimento humano a partir de bases absolutamente certas e indubitáveis. Não confiava no que havia simplesmente herdado da tradição. Começou a duvidar sistematicamente de tudo. Os sentidos enganam—às vezes. O mundo pode ser sonho elaborado—sim, é possível. A matemática pode ser ilusão criada por um gênio maligno—por que não?</p>
+                <p>Depois dessa dúvida radical e metódica, Descartes encontra um ponto inabalável: o próprio ato de duvidar prova irrefutavelmente que existe alguém duvidando. "Cogito, ergo sum"—Penso, logo existo. É absolutamente impossível estar errado sobre isso porque mesmo o pensamento que nega a existência prova a existência do pensador.</p>
+                <p>A partir desse ponto indubitável, ele reconstrói sistematicamente todo o conhecimento. Prova a existência de Deus pela ideia de perfeição que carrega (um ser imperfeito não poderia gerar a ideia de perfeição sem causa). Por meio de Deus—que não pode ser enganador—garante que o mundo externo realmente existe e que sua percepção clara e distinta é confiável.</p>
+                <p>Mas há uma dificuldade fundamental que continua nos ocupando: se a mente é imaterial e o corpo é material, como exatamente se comunicam? Como a vontade move o corpo? Descartes propõe uma separação radical: res cogitans (a mente, coisa pensante) versus res extensa (o corpo, coisa extensa no espaço). Isso criou o "problema mente-corpo" que ainda desafia filósofos e neurocientistas.</p>
+            </div>
+            <div class="reflection-section">
+                <button class="reflection-header" onclick="toggleReflection(this)">
+                    💭 Desafio Filosófico <span class="reflection-icon">▼</span>
+                </button>
+                <div class="reflection-content">
+                    <div class="reflection-text">
+                        <strong>Experimente agora:</strong> Siga o caminho cartesiano: duvide sistematicamente de tudo que é possível duvidar. O que permanece absolutamente indudável para você ao final?
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="cap10" class="chapter">
+            <div class="chapter-number">Capítulo 10 • Modernidade</div>
+            <h2>Empirismo: Aprender Pelos Sentidos</h2>
+            <div class="chapter-meta">
+                <strong>Período:</strong> Séculos XVII–XVIII — Inglaterra
+            </div>
+            <div class="chapter-content">
+                <p>Enquanto Descartes e os racionalistas continentais confiavam na razão pura, pensadores ingleses discordavam fundamentalmente. Tudo que você conhece vem da experiência, argumentavam. Nada de ideias inatas flutuando na mente. A mente é uma tábula rasa—uma folha de papel em branco. Tudo que você sabe, aprendeu através dos sentidos ou da reflexão sobre a própria mente.</p>
+                <p>John Locke foi o mais influente. Não há ideias inatas, argumentava em seu Ensaio sobre o Entendimento Humano. Tudo vem da sensação (percepção do mundo externo) ou da reflexão (percepção das operações da própria mente). As ideias simples (vermelho, quente, duro, doce) vêm diretamente da experiência. As ideias complexas (triângulo, governo, Deus) a mente elabora combinando as simples.</p>
+                <p>David Hume foi ainda mais radical. Questionou as próprias fundações do conhecimento científico. Cremos que uma coisa causa outra—o fogo causa a dor. Mas quando você realmente examina, o que você observa? Um evento seguido de outro. Nunca a causalidade em si mesma. É apenas hábito mental—você espera dor porque viu fogo causar dor muitas vezes.</p>
+                <p>Nossas crenças mais fundamentais—a identidade pessoal, a existência de mundo externo, a causalidade universal—não são conhecimentos racionais demonstráveis. São hábitos psicológicos formados pela experiência repetida. Isso reverberou por toda a filosofia posterior, especialmente em Kant.</p>
+            </div>
+            <div class="reflection-section">
+                <button class="reflection-header" onclick="toggleReflection(this)">
+                    💭 Desafio Filosófico <span class="reflection-icon">▼</span>
+                </button>
+                <div class="reflection-content">
+                    <div class="reflection-text">
+                        <strong>Provocação profunda:</strong> Se Hume está certo e a causalidade é apenas hábito psicológico, não a necessidade lógica, é a ciência realmente menos confiável do que frequentemente supomos?
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="cap11" class="chapter">
+            <div class="chapter-number">Capítulo 11 • Modernidade</div>
+            <h2>Contrato Social: Hobbes, Locke, Rousseau</h2>
+            <div class="chapter-meta">
+                <strong>Período:</strong> Séculos XVII–XVIII — Inglaterra e França
+            </div>
+            <div class="chapter-content">
+                <p>Se the Estado não é divino, se não vem de Deus, de onde vem sua legitimidade? A resposta inovadora: de um contrato. As pessoas se reúnem racionalmente e concordam em estabelecer governo. É criação puramente humana, não divina. Isso era profundamente radical para a época.</p>
+                <p>Thomas Hobbes enxergava tudo em cores muito negras. Sem governo, sem autoridade, a vida seria "guerra de todos contra todos". Cada um tentaria dominar os outros. Seria brutal. Só a ameaça de morte mantém a paz. Logo, todos racionalmente concordam: transferimos absolutamente todo poder a um soberano que em troca garante ordem e segurança. Você abre mão de liberdade completa, mas escapa da morte.</p>
+                <p>John Locke discordava radicalmente. No estado de natureza, as pessoas já são livres e iguais, com direitos naturais inalienáveis: vida, liberdade, propriedade. O governo não nasce para escravizá-lo. Nasce para proteger esses direitos que você já possuía. Se fracassa, você tem direito legítimo à revolução. Isso inspirou diretamente a Independência Americana (1776).</p>
+                <p>Jean-Jacques Rousseau imaginava terceira visão completamente diferente. O homem nasce bom—é o "bom selvagem". É a civilização que o corrompe. Especialmente a propriedade privada que gera desigualdade. Em seu contrato, o povo exerce poder de forma direta, expressando a "vontade geral"—que não é simples soma das vontades, mas o interesse genuinamente comum. Isso inspirou a Revolução Francesa (1789).</p>
+            </div>
+            <div class="reflection-section">
+                <button class="reflection-header" onclick="toggleReflection(this)">
+                    💭 Desafio Filosófico <span class="reflection-icon">▼</span>
+                </button>
+                <div class="reflection-content">
+                    <div class="reflection-text">
+                        <strong>Reflexão política pessoal:</strong> Qual visão de contrato social ressoa mais com você: Hobbes (ordem pela força), Locke (direitos naturais), ou Rousseau (bem comum soberano)?
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="cap12" class="chapter">
+            <div class="chapter-number">Capítulo 12 • Modernidade</div>
+            <h2>O Iluminismo: A Luz da Razão</h2>
+            <div class="chapter-meta">
+                <strong>Período:</strong> Século XVIII — Europa, especialmente França
+            </div>
+            <div class="chapter-content">
+                <p>O século XVIII foi época de confiança inabalável. Razão resolveria tudo—superstição, ignorância, opressão. Iluminação mental era a solução. O progresso humano era inevitável. Essa era a convicção fundamental.</p>
+                <p>Immanuel Kant definiu a época perfeitamente: "Iluminismo é a saída do homem de sua menoridade, pela qual ele próprio é culpado. Menoridade é a incapacidade de se servir de seu entendimento sem orientação de outrem... Sapere aude! Ousa saber! Tenha coragem de usar sua própria razão!"</p>
+                <p>Voltaire foi o guerreiro intelectual. Atacava intolerância religiosa, crueldade, superstição com pena afiada. Defendia razão e ciência contra dogma. Montesquieu desenvolveu a teoria da separação de poderes—Executivo, Legislativo, Judiciário—cada um limitando os outros, prevenindo concentração de poder e tirania. Isso influenciou diretamente a Constituição americana.</p>
+                <p>Diderot e d'Alembert criaram a Enciclopédia—esforço titânico para reunir todo o conhecimento humano em um único lugar, tornando-o acessível a todos, não apenas à elite. O conhecimento liberta. A ignorância escraviza. Esse era o mantra.</p>
+            </div>
+            <div class="reflection-section">
+                <button class="reflection-header" onclick="toggleReflection(this)">
+                    💭 Desafio Filosófico <span class="reflection-icon">▼</span>
+                </button>
+                <div class="reflection-content">
+                    <div class="reflection-text">
+                        <strong>Paradoxo moderno:</strong> Se o Iluminismo trouxe benefícios imensos (direitos, democracia) mas também serviu ideologia para colonialismo "civilizador" e totalitarismos do século XX, como avaliamos seu legado?
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="cap13" class="chapter">
+            <div class="chapter-number">Capítulo 13 • Idealismo</div>
+            <h2>Kant: Limites do Conhecimento</h2>
+            <div class="chapter-meta">
+                <strong>Período:</strong> 1724–1804 — Königsberg, Prússia
+            </div>
+            <div class="chapter-content">
+                <p>Kant nunca saiu de sua cidade natal. Mas sua mente viajou por mundos intelectuais imensos. David Hume o "acordou de seu sono dogmático," conforme o próprio Kant reconheceu. Descartes confiava na razão pura. Empiristas desconfiavam. Kant tentou síntese: ambos estão certos, parcialmente.</p>
+                <p>Todo conhecimento, argumentou, tem duas partes inseparáveis: matéria (dados sensoriais fornecidos pela experiência) e forma (estruturas a priori que você traz). Você não recebe o mundo puro e não filtrado. Seus sentidos já estão estruturados por espaço e tempo. Seu entendimento já traz categorias como causalidade, substância. O conhecimento resulta da síntese entre matéria externa e forma interna.</p>
+                <p>Mas isso tem limite radical: você nunca conhece as coisas como são em si mesmas (noumena, "coisa em si"). Conhece apenas como lhe aparecem (phenomena), filtradas pela estrutura da sua mente. A coisa em si permanece inacessível. Isso coloca limite à metafísica clássica: você não pode conhecer Deus ou a alma racionalmente. Não porque não existem, mas porque estão além da experiência possível.</p>
+                <p>Em ética, Kant propõe o imperativo categórico: "Age apenas conforme a máxima pela qual pudesses ao mesmo tempo querer que se tornasse lei universal." É teste prático: sua ação funcionaria se todos agissem assim? Se sim, é moral. Se não, é imoral. Não depende de consequências. É absolutamente universal. Os seres humanos devem sempre ser tratados como fins em si, nunca apenas como meios.</p>
+            </div>
+            <div class="reflection-section">
+                <button class="reflection-header" onclick="toggleReflection(this)">
+                    💭 Desafio Filosófico <span class="reflection-icon">▼</span>
+                </button>
+                <div class="reflection-content">
+                    <div class="reflection-text">
+                        <strong>Teste kantiano prático:</strong> Pense em uma ação que está considerando tomar. Você gostaria genuinamente que todos agissem assim? Se não, talvez seja imoralmente questionável por esse critério.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="cap14" class="chapter">
+            <div class="chapter-number">Capítulo 14 • Idealismo</div>
+            <h2>Hegel: Evolução do Espírito</h2>
+            <div class="chapter-meta">
+                <strong>Período:</strong> 1770–1831 — Alemanha
+            </div>
+            <div class="chapter-content">
+                <p>Hegel olhava para Kant e pensava: ele limitou excessivamente o conhecimento. Há mais possibilidades. Hegel desenvolveu a maior ambição filosófica da modernidade: explicar a realidade como um todo dinâmico em constante desenvolvimento. Não coisas estáticas. Processo contínuo. Tudo se move. Tudo evolui.</p>
+                <p>O conceito central é Geist—Espírito. Não é entidade sobrenatural. É razão manifestando-se progressivamente na história, na cultura, na arte, nas instituições humanas. O Espírito não começa perfeito. Desenvolve-se lentamente. Passa por contradições internas. Supera-as em níveis mais altos de desenvolvimento (processo que Hegel chama Aufhebung—suprassunção simultânea).</p>
+                <p>A história não é caótica ou acidental. É o desenvolvimento progressivo do Espírito em direção à liberdade realizada. Cada época tem seu "espírito da época". Instituições políticas expressam o nível de desenvolvimento alcançado. O Estado, quando racional, é realização da liberdade humana.</p>
+                <p>Mas há ironia fundamental: sua afirmação de que "o que é racional é real, e o que é real é racional" significaria que o Estado prussiano em que vivia era racionalmente justificado? Seus críticos responderam: não! O real deve tornar-se racional. A história não terminou. Há contradições a superar. Karl Marx virou Hegel de cabeça para baixo: não é o Espírito que move a matéria. É a matéria—as condições econômicas—que determina a consciência (o Espírito).</p>
+            </div>
+            <div class="reflection-section">
+                <button class="reflection-header" onclick="toggleReflection(this)">
+                    💭 Desafio Filosófico <span class="reflection-icon">▼</span>
+                </button>
+                <div class="reflection-content">
+                    <div class="reflection-text">
+                        <strong>História dialética:</strong> Identifique uma contradição importante em sua época. Como você poderia superá-la em nível mais elevado de síntese?
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="cap15" class="chapter">
+            <div class="chapter-number">Capítulo 15 • Idealismo</div>
+            <h2>Marx: Transformação Social</h2>
+            <div class="chapter-meta">
+                <strong>Período:</strong> 1818–1883 — Europa
+            </div>
+            <div class="chapter-content">
+                <p>Marx viu a Revolução Industrial em toda sua brutalidade. Viu trabalhadores trabalhando 14 a 16 horas diárias em fábricas sujas, perigosas. Viu crianças em minas de carvão. Viu riqueza absurda ao lado de pobreza extrema. Teorizou sobre isso com rigor científico e indignação moral genuína.</p>
+                <p>Sua ideia central: a história é luta de classes. Sempre houve dominadores e dominados. No capitalismo, a burguesia (proprietária dos meios de produção) explora o proletariado (vendedor de força de trabalho). A mais-valia—diferença entre o valor que o trabalhador produz e o salário que recebe—é exploração pura. Fonte de lucro capitalista. Funcionamento normal do sistema.</p>
+                <p>Mas o capitalismo contém suas próprias contradições internas. Precisa expandir constantemente para gerar lucro. Cria crises periódicas. Gera concentração progressiva de riqueza. Eventualmente, entrará em colapso pelas próprias contradições. O proletariado, tomando consciência de classe, fará revolução histórica. Não será violência arbitrária. Será história se desenrolando segundo lógica material.</p>
+                <p>Marx também descreveu alienação profunda: no capitalismo, você se aliena de seu produto (que pertence ao capitalista), seu processo de trabalho (mecânico, repetitivo, destituído de criatividade), seus companheiros de trabalho (competição), sua essência humana (o trabalho deveria ser criativo). O trabalho que deveria expressar liberdade se torna venda forçada.</p>
+            </div>
+            <div class="reflection-section">
+                <button class="reflection-header" onclick="toggleReflection(this)">
+                    💭 Desafio Filosófico <span class="reflection-icon">▼</span>
+                </button>
+                <div class="reflection-content">
+                    <div class="reflection-text">
+                        <strong>Reflexão sobre alienação:</strong> Você se sente alienado em seu trabalho? Desconectado do produto, do processo, dos colegas? O que seria trabalho não-alienado para você?
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="cap16" class="chapter">
+            <div class="chapter-number">Capítulo 16 • Contemporânea I</div>
+            <h2>Nietzsche: Quebra de Valores</h2>
+            <div class="chapter-meta">
+                <strong>Período:</strong> 1844–1900 — Alemanha
+            </div>
+            <div class="chapter-content">
+                <p>Nietzsche é o martelo da filosofia. Trabalha quebrando ídolos com precisão. E o ídolo supremo que quebra é o próprio Ocidente e seus valores fundamentais.</p>
+                <p>Sua diagnose: estamos em crise civilizacional profunda. O Iluminismo destruiu a metafísica com a própria razão que cultivou. Deus está morto—não por morte literal, mas porque ninguém acredita mais. Não há mais fundamento absoluto. Valores desabaram. No vácuo, reina niilismo—nada importa. Tudo é relativo. Nada tem sentido transcendente.</p>
+                <p>Mas Nietzsche não é pessimista completo. A morte de Deus é também libertação suprema. Agora podemos criar novos valores—valores que afirmam a vida, que a celebram. O problema: a maioria das pessoas não consegue isso. Em vez disso, adota o que Nietzsche chama de moral de escravos: fraqueza disfarçada de virtude. Humildade, compaixão, negação da vida.</p>
+                <p>O cristianismo é a forma máxima dessa moral de escravos. Transformou a fraqueza em virtude suprema. Os mansos herdarão a terra. Mas há alternativa radical: vontade de potência—afirmação da vida em toda sua complexidade, em sua dureza, em sua beleza. Criação de novos valores próprios. Isso é o Übermensch—não raça superior, mas ideal de ser que supera valores herdados e cria os seus.</p>
+            </div>
+            <div class="reflection-section">
+                <button class="reflection-header" onclick="toggleReflection(this)">
+                    💭 Desafio Filosófico <span class="reflection-icon">▼</span>
+                </button>
+                <div class="reflection-content">
+                    <div class="reflection-text">
+                        <strong>Auto-exame nietzschiano:</strong> Você segue valores que realmente criou, que você acredita profundamente? Ou valores que simplesmente herdou, absorveu sem questionar?
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="cap17" class="chapter">
+            <div class="chapter-number">Capítulo 17 • Contemporânea I</div>
+            <h2>Pragmatismo: Valor Prático</h2>
+            <div class="chapter-meta">
+                <strong>Período:</strong> Final do Século XIX — Estados Unidos
+            </div>
+            <div class="chapter-content">
+                <p>Enquanto europeus debatiam valores absolutos, americanos perguntavam pragmaticamente: isso funciona? O pragmatismo é a contribuição original mais importante que os Estados Unidos ofereceram à filosofia mundial.</p>
+                <p>Charles Sanders Peirce formulou o princípio fundamental: o significado inteiro de uma ideia está contido em suas consequências práticas concebíveis. Se duas ideias têm as mesmas consequências práticas, são, na verdade, idênticas. William James popularizou: uma ideia é verdadeira se funciona, se nos ajuda genuinamente a navegar pela experiência de forma satisfatória.</p>
+                <p>Isso pode parecer relativista, mas não é. Algumas ideias funcionam melhor que outras. Você pode testar. O teste é pragmático: quais consequências reais você obtém? John Dewey aplicou isso radicalmente à educação: aprender fazendo (learning by doing). Não passivo. Ativo. Experimental. Centrado no aluno como ser vivo.</p>
+                <p>O pragmatismo influenciou psicologia comportamental, pedagogia progressista, até filosofia analítica contemporânea. Sua pergunta permanece poderosa: de que serve a ideia? Como realmente muda sua prática, sua vida? Qual é seu impacto concreto no mundo?</p>
+            </div>
+            <div class="reflection-section">
+                <button class="reflection-header" onclick="toggleReflection(this)">
+                    💭 Desafio Filosófico <span class="reflection-icon">▼</span>
+                </button>
+                <div class="reflection-content">
+                    <div class="reflection-text">
+                        <strong>Teste pragmático:</strong> Que crença sua tem consequências positivas genuínas na vida? Que crença tem consequências negativas? Isso deveria determinar se você mantém ou abandona?
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="cap18" class="chapter">
+            <div class="chapter-number">Capítulo 18 • Contemporânea II</div>
+            <h2>Existencialismo: Liberdade Radical</h2>
+            <div class="chapter-meta">
+                <strong>Período:</strong> Século XX — França e Alemanha
+            </div>
+            <div class="chapter-content">
+                <p>Após o Holocausto, após Segunda Guerra Mundial, o otimismo iluminista morreu definitivamente. A razão havia criado as câmaras de gás. O progresso havia levado ao genocídio industrial. Nesse caos, o existencialismo oferecia não respostas consoladoras, mas honestidade radical sobre a condição humana.</p>
+                <p>Jean-Paul Sartre formulou o princípio central: "A existência precede a essência." Uma cadeira é fabricada com propósito definido—sua essência existe antes da existência. Mas você? Você existe primeiro, sem natureza ou propósito predeterminados. Você cria sua essência através de suas escolhas. Aqui vem o incômodo: você é radicalmente livre. Condenado a ser livre.</p>
+                <p>Essa liberdade gera angústia profunda. Você não pode escapar escolhendo não escolher. Recusar escolher é, em si, escolha. A má-fé é tentativa de fugir dessa responsabilidade terrível. Fingir que seu papel social determina você. Fingir que está preso. Mas está? Não. Você escolhe colaborar, escolhe aceitar.</p>
+                <p>Simone de Beauvoir aplicou existencialismo à condição feminina: "Não se nasce mulher, torna-se mulher." Feminilidade não é essência natural. É construção histórica e social imposta. Essa obra fundou o feminismo moderno. Albert Camus enfatizava o absurdo: o universo é fundamentalmente silencioso. Você deseja sentido transcendente. Essa contradição é absurda.</p>
+            </div>
+            <div class="reflection-section">
+                <button class="reflection-header" onclick="toggleReflection(this)">
+                    💭 Desafio Filosófico <span class="reflection-icon">▼</span>
+                </button>
+                <div class="reflection-content">
+                    <div class="reflection-text">
+                        <strong>Liberdade e responsabilidade:</strong> Você se sente verdadeiramente livre em suas escolhas? Em que áreas você pratica "má-fé"—fingindo estar determinado quando na verdade é livre?
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="cap19" class="chapter">
+            <div class="chapter-number">Capítulo 19 • Contemporânea II</div>
+            <h2>Wittgenstein: Enigma da Linguagem</h2>
+            <div class="chapter-meta">
+                <strong>Período:</strong> 1889–1951 — Áustria e Inglaterra
+            </div>
+            <div class="chapter-content">
+                <p>Wittgenstein é raro: teve duas carreiras filosóficas distintas, reconheceu que a primeira estava fundamentalmente errada, e deixou ambas profundamente influentes.</p>
+                <p>Seu primeiro trabalho, o Tractatus Logico-Philosophicus (1921), propõe que linguagem é figuração lógica da realidade. Proposições com sentido são "figuras" de estados de coisas possíveis no mundo. O que não pode ser dito—ética, estética, o místico—deve ser silenciado.</p>
+                <p>Depois Wittgenstein se afastou de filosofia por quase uma década. Quando retorna, vê que sua primeira filosofia estava profundamente enganada. A linguagem não é figuração lógica de realidade escondida. É conjunto de práticas sociais diversas—os "jogos de linguagem" (Sprachspiele).</p>
+                <p>O significado de uma palavra não é objeto que ela representa. É seu uso em uma prática social específica. "O significado é o uso." Diferentes contextos e formas de vida geram diferentes jogos de linguagem com regras próprias: linguagem da ciência, da religião, da arte, do direito, da vida cotidiana. Os problemas filosóficos surgem quando confundimos regras de um jogo com outro—quando "a linguagem sai de férias" do contexto prático.</p>
+            </div>
+            <div class="reflection-section">
+                <button class="reflection-header" onclick="toggleReflection(this)">
+                    💭 Desafio Filosófico <span class="reflection-icon">▼</span>
+                </button>
+                <div class="reflection-content">
+                    <div class="reflection-text">
+                        <strong>Jogos de linguagem:</strong> Identifique como a mesma palavra tem significados completamente diferentes em contextos distintos de sua vida. Como isso valida a teoria de Wittgenstein?
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="cap20" class="chapter">
+            <div class="chapter-number">Capítulo 20 • Contemporânea II</div>
+            <h2>Escola de Frankfurt: Crítica Social</h2>
+            <div class="chapter-meta">
+                <strong>Período:</strong> Século XX — Alemanha e Estados Unidos
+            </div>
+            <div class="chapter-content">
+                <p>A Escola de Frankfurt perguntava: como a razão se tornou instrumento de dominação? Como o projeto iluminista de emancipação humana gerou totalitarismo e opressão?</p>
+                <p>Max Horkheimer e Theodor Adorno, escribindo em exílio durante Segunda Guerra, argumentaram na Dialética do Esclarecimento (1944) que o próprio Iluminismo continha os germes da dominação total. Razão instrumental—calculando meios para fins dados, sem questionar os fins—colonizou todas as esferas da vida humana. Transformou natureza em recurso a explorar, seres humanos em engrenagens produtivas, cultura em indústria.</p>
+                <p>A "indústria cultural" produz entretenimento em massa que pacifica e manipula as massas. Você pensa estar escolhendo livremente o que consome. Na verdade, está consumindo exatamente aquilo que foi decidido para você. Sua liberdade é ilusão cuidadosamente arquitetada.</p>
+                <p>Herbert Marcuse descreveu o "homem unidimensional"—incapaz de imaginar genuinamente alternativas ao sistema existente. Por quê? Porque o capitalismo satisfaz suas necessidades materiais (ainda que artificialmente criadas). Elimina a negatividade, a capacidade crítica de sonhar diferente. O resultado é integração completa ao sistema.</p>
+            </div>
+            <div class="reflection-section">
+                <button class="reflection-header" onclick="toggleReflection(this)">
+                    💭 Desafio Filosófico <span class="reflection-icon">▼</span>
+                </button>
+                <div class="reflection-content">
+                    <div class="reflection-text">
+                        <strong>Cultura de massa:</strong> Você consome entretenimento que realmente escolheu, ou aquele que foi decidido para você pelas plataformas e algoritmos? Como distinguir?
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="cap21" class="chapter">
+            <div class="chapter-number">Capítulo 21 • Contemporânea II</div>
+            <h2>Habermas: Poder do Diálogo</h2>
+            <div class="chapter-meta">
+                <strong>Período:</strong> 1929–presente — Alemanha
+            </div>
+            <div class="chapter-content">
+                <p>Jürgen Habermas foi assistente de Theodor Adorno. Herdou a pergunta sobre dominação e razão instrumental. Mas ofereceu resposta profundamente diferente: não desistir da razão, mas encontrar e cultivar outro tipo dela.</p>
+                <p>Há razão instrumental (meios-fins, calculista) e razão comunicativa (orientada ao entendimento mútuo genuíno). Essa segunda surge na linguagem quando você não está tentando manipular o outro, mas realmente buscando acordo racional fundado em razão. É raro, exigente, mas possível.</p>
+                <p>O problema da modernidade é que razão sistêmica (mercado, burocracia estatal) coloniza o "mundo da vida" (Lebenswelt)—horizonte compartilhado de sentido que torna comunicação possível. Quando tudo é mercadoria, quando tudo é regulado por burocracia sem alma, a comunicação genuína se torna impossível.</p>
+                <p>Sua solução: democracia deliberativa. Não apenas votar mecanicamente. Deliberação pública genuína. Debate onde todos têm direito igual de participar, questionar, argumentar—sem coerção. Essa conversação racional gera legitimidade política real. Leis que vêm de tal processo são justas não apenas porque maioria votou, mas porque foram racionalmente justificadas publicamente.</p>
+            </div>
+            <div class="reflection-section">
+                <button class="reflection-header" onclick="toggleReflection(this)">
+                    💭 Desafio Filosófico <span class="reflection-icon">▼</span>
+                </button>
+                <div class="reflection-content">
+                    <div class="reflection-text">
+                        <strong>Comunicação genuína:</strong> Você consegue conversar apenas para entender o outro, sem tentar convencer ou manipular? Imagine fazer isso regularmente—como mudaria suas relacionamentos?
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="cap22" class="chapter">
+            <div class="chapter-number">Capítulo 22 • Contemporânea II</div>
+            <h2>Foucault: Poder, Saber, Instituições</h2>
+            <div class="chapter-meta">
+                <strong>Período:</strong> 1926–1984 — França
+            </div>
+            <div class="chapter-content">
+                <p>Michel Foucault dedicou-se a mostrar como poder e saber estão inseparavelmente entrelaçados. Você nunca conhece "objetivamente". Sempre conhece de uma posição de poder. E esse conhecimento, por sua vez, reforça e reproduz o poder.</p>
+                <p>Ele analisou como cada época tem sua própria "episteme"—estrutura inconsciente que determina o que pode ser pensado, dito, considerado verdadeiro. Cada episteme é descontínua das anteriores. Não há progresso linear do conhecimento. Há rupturas abruptas e incomensurabilidade.</p>
+                <p>Em Vigiar e Punir, Foucault rastreia como mudou o castigo. Antigamente era espetáculo público—suplício visual para dissuadir. Depois, passou para prisão disciplinar. Mais humana? Talvez. Mas mais eficiente em produzir corpos dóceis e mentes domesticadas. O panóptico de Bentham (prisão circular onde um vigilante vê todos sem ser visto) torna-se metáfora perfeita: na sociedade moderna, você é sempre potencialmente vigiado. Logo, você se vigia a si mesmo.</p>
+                <p>O poder moderno não opera principalmente por repressão violenta óbvia. Opera por vigilância, normalização, internalização do controle. Você faz o que esperam sem que ninguém force. Porque interiorizou a vigilância. Foucault mostrou como categorias que tomamos como naturais (loucura, criminalidade, sexualidade) são construções históricas. Isso abriu espaço radical para questionar muitas certezas contemporâneas.</p>
+            </div>
+            <div class="reflection-section">
+                <button class="reflection-header" onclick="toggleReflection(this)">
+                    💭 Desafio Filosófico <span class="reflection-icon">▼</span>
+                </button>
+                <div class="reflection-content">
+                    <div class="reflection-text">
+                        <strong>Vigilância internalizada:</strong> Você se comporta diferentemente quando potencialmente observado? Como a possibilidade de observação muda suas ações, mesmo quando ninguém está literalmente olhando?
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="cap23" class="chapter">
+            <div class="chapter-number">Capítulo 23 • Contemporânea II</div>
+            <h2>Bauman: Mundo Líquido</h2>
+            <div class="chapter-meta">
+                <strong>Período:</strong> 1925–2017 — Polônia e Inglaterra
+            </div>
+            <div class="chapter-content">
+                <p>Zygmunt Bauman sobreviveu ao Holocausto. Viu totalitarismo destruir civilização. Depois viu outro tipo de sistema: não totalitário, mas igualmente desumanizador. Moderno e Líquido—profundamente distópico de forma mais sutil.</p>
+                <p>Ele contrasta modernidade sólida (instituições estáveis, identidades fixas, empregos para vida, relacionamentos duradouros) com modernidade líquida contemporânea (tudo fluido, provisório, descartável). Nas redes sociais, você conecta e desconecta com um clique. Relacionamentos são "conexões", não ligações. Identidade é projeto inacabado, constantemente renegociado.</p>
+                <p>O consumo substitui a produção como eixo estruturante da vida. Você não é produtor que cria valor. É consumidor que consome identidades empacotadas. Sua identidade é aquilo que consome. Marca que usa. Estilo que segue. E tudo é descartável—você não é. Você é obsoleto a cada nova versão, novo trend.</p>
+                <p>Na modernidade líquida, responsabilidade é privatizada. Problemas estruturais—desemprego, desigualdade, falta de sentido—são apresentados como falhas pessoais. Não consegue emprego? Culpa sua—não se educou suficientemente. Não é feliz? Fracassou—não se esforçou o bastante. Quando na verdade são questões coletivas sendo tratadas como individuais.</p>
+            </div>
+            <div class="reflection-section">
+                <button class="reflection-header" onclick="toggleReflection(this)">
+                    💭 Desafio Filosófico <span class="reflection-icon">▼</span>
+                </button>
+                <div class="reflection-content">
+                    <div class="reflection-text">
+                        <strong>Liquidez pessoal:</strong> Você se sente líquido, fluido, em constante mudança sem base sólida? Ou consegue manter alguma solidez em sua identidade? O que a sustenta?
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="cap24" class="chapter">
+            <div class="chapter-number">Capítulo 24 • Era Digital</div>
+            <h2>Filosofia na Era Digital e Pós-Moderna</h2>
+            <div class="chapter-meta">
+                <strong>Período:</strong> Final do Século XX — Presente
+            </div>
+            <div class="chapter-content">
+                <p>Grandes narrativas caíram. Não há mais crença em Progresso (com P maiúsculo), nem em Revolução redentora, nem em Razão como salvação. Pós-modernidade é essa incredulidade fundamental.</p>
+                <p>Jean-François Lyotard diagnosticou: vivemos na pós-modernidade—era de "incredulidade em relação às metanarrativas" que legitimavam conhecimento e ação. O conhecimento é legitimado não por ideais nobres, mas por eficiência (performatividade). O que funciona. O que vende. O que gera resultados mensuráveis.</p>
+                <p>Jacques Derrida propôs desconstrução: todo texto filosófico depende de oposições hierárquicas (razão/emoção, ser/nada, presença/ausência). Essas oposições são instáveis, reversíveis, nunca definitivas. Significado não é presente ou fixo. É constantemente diferido, relacional, jamais completo. Há sempre mais a dizer, mais a questionar.</p>
+                <p>Gilles Deleuze viu multiplicidade, devir, diferença—em oposição a filosofias da identidade e representação. A realidade não é coisa estável. É processo contínuo. Conceitos como "rizoma" (estrutura de conhecimento sem centro) anteciparam a internet. Byung-Chul Han, filósofo contemporâneo, diagnostica a patologia específica: você se autoexplora voluntariamente. Acredita estar se realizando. Mas está em eterna perseguição de desempenho. O resultado é esgotamento, burnout, depressão como doença característica da época.</p>
+            </div>
+            <div class="reflection-section">
+                <button class="reflection-header" onclick="toggleReflection(this)">
+                    💭 Desafio Filosófico <span class="reflection-icon">▼</span>
+                </button>
+                <div class="reflection-content">
+                    <div class="reflection-text">
+                        <strong>Autoexploração digital:</strong> Você se sente pressionado por desempenho nas redes? Como distinguir autossuperação genuína de autoexploration destrutiva? Seu telefone ajuda ou prejudica sua realização?
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="cap25" class="chapter">
+            <div class="chapter-number">Capítulo 25 • Era Digital</div>
+            <h2>O Futuro da Filosofia e Você</h2>
+            <div class="chapter-meta">
+                <strong>Período:</strong> Século XXI — Presente e Futuro
+            </div>
+            <div class="chapter-content">
+                <p>Chegamos ao presente. O futuro é agora. E a filosofia está mais viva que nunca, mais urgente que nunca.</p>
+                <p>Inteligência artificial levanta questões profundas sobre consciência e identidade: se máquina pensa indistintamente de humano, o que nos diferencia? Somos apenas máquinas muito complexas? Nick Bostrom e filósofos do transumanismo exploram: devemos aprimorar a si mesmo tecnologicamente? Quais são os riscos existenciais da superinteligência?</p>
+                <p>Crise climática exige revisão radical de nossa relação com natureza. Donna Haraway propõe simpoiese—fazer-com—em vez de autossuficiência humana. Reconhecer que somos sempre co-constituídos com outras espécies, com ambientes. Ética ecológica se torna urgente, não opcional.</p>
+                <p>Martha Nussbaum e Amartya Sen desenvolvem "abordagem das capacidades": justiça social não é riqueza ou utilidade. É capacidade real de viver plenamente: saúde, educação, participação política genuína, relações amorosas, integridade corporal. Peter Singer desafia intuições sobre direitos dos animais: por que seu sofrimento importa menos que humano?</p>
+                <p>Filosofia do futuro será necessariamente interdisciplinar, genuinamente global, urgente. Mas continuará sendo o que sempre foi: exercício de liberdade de pensar. Não em busca de respostas definitivas, mas de perguntas cada vez mais precisas e honestas. Não em busca de certeza absoluta, mas de clareza vivível.</p>
+            </div>
+            <div class="reflection-section">
+                <button class="reflection-header" onclick="toggleReflection(this)">
+                    💭 Desafio Final <span class="reflection-icon">▼</span>
+                </button>
+                <div class="reflection-content">
+                    <div class="reflection-text">
+                        <strong>Sua filosofia:</strong> Qual filósofo ou ideia neste livro tocou você mais profundamente? E mais importante: como você vai viver diferentemente por tê-los lido e pensado?
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- GLOSSÁRIO -->
+    <main id="glossary" class="glossary-page">
+        <div class="hero">
+            <h1>Glossário</h1>
+            <p class="subtitle">22 Termos Filosóficos Essenciais</p>
+        </div>
+
+        <div class="glossary-container">
+            <div class="glossary-item">
+                <div class="glossary-term-title">Arché</div>
+                <div class="glossary-definition">Princípio fundamental ou elemento originário de todas as coisas. Os filósofos pré-socráticos buscavam compreender o arché do cosmos.</div>
+                <div class="glossary-origin">Do grego ἀρχή (arkhé) = princípio, começo, origem.</div>
+            </div>
+
+            <div class="glossary-item">
+                <div class="glossary-term-title">Ápeiron</div>
+                <div class="glossary-definition">O "ilimitado" ou "indefinido" como princípio originário do universo. Conceito de Anaximandro, anterior e superior a qualquer elemento material determinado.</div>
+                <div class="glossary-origin">Do grego ἄπειron (ápeiron) = sem limites, infinito.</div>
+            </div>
+
+            <div class="glossary-item">
+                <div class="glossary-term-title">Logos</div>
+                <div class="glossary-definition">Razão universal que governa o cosmos segundo Heráclito. Também significa palavra, discurso e razão—central na filosofia estoica e cristã.</div>
+                <div class="glossary-origin">Do grego λόγος (lógos) = palavra, razão, propósito.</div>
+            </div>
+
+            <div class="glossary-item">
+                <div class="glossary-term-title">Maiêutica</div>
+                <div class="glossary-definition">Método socrático de questionamento. Como uma parteira auxilia o parto, Sócrates auxiliava a "parir" conhecimento latente.</div>
+                <div class="glossary-origin">Do grego μαιευτικé (maieutikê) = arte da parteira.</div>
+            </div>
+
+            <div class="glossary-item">
+                <div class="glossary-term-title">Elencos</div>
+                <div class="glossary-definition">Refutação socrática que revela contradições e ignorância oculta nas respostas do interlocutor.</div>
+                <div class="glossary-origin">Do grego ἔλεγχος (élegchos) = refutação, exame crítico.</div>
+            </div>
+
+            <div class="glossary-item">
+                <div class="glossary-term-title">Episteme</div>
+                <div class="glossary-definition">Conhecimento verdadeiro, científico e fundamentado em oposição à opinião (doxa). Para Platão, acessível apenas pela razão pura.</div>
+                <div class="glossary-origin">Do grego ἐπιστήμη (epistémê) = conhecimento, ciência.</div>
+            </div>
+
+            <div class="glossary-item">
+                <div class="glossary-term-title">Doxa</div>
+                <div class="glossary-definition">Opinião ou crença baseada na percepção sensorial, em oposição ao conhecimento verdadeiro (episteme).</div>
+                <div class="glossary-origin">Do grego δόξα (dóxa) = opinião, crença.</div>
+            </div>
+
+            <div class="glossary-item">
+                <div class="glossary-term-title">Eudaimonia</div>
+                <div class="glossary-definition">Florescimento humano pleno ou "felicidade". Realização da excelência própria do ser humano como ser racional.</div>
+                <div class="glossary-origin">Do grego εὐδαιμονía (eudaimonía) = estado de boa sorte, prosperidade genuína.</div>
+            </div>
+
+            <div class="glossary-item">
+                <div class="glossary-term-title">Areté</div>
+                <div class="glossary-definition">Excelência ou virtude. Realização plena das capacidades de um ser. Caminho para eudaimonia na ética grega.</div>
+                <div class="glossary-origin">Do grego ἀρετή (aretê) = excelência, qualidade superior.</div>
+            </div>
+
+            <div class="glossary-item">
+                <div class="glossary-term-title">Ataraxia</div>
+                <div class="glossary-definition">Tranquilidade e imperturbabilidade da alma. Ideal de vida buscado por epicuristas e céticos como ausência de dor e perturbação.</div>
+                <div class="glossary-origin">Do grego ἀταραξía (ataraxía) = ausência de perturbação.</div>
+            </div>
+
+            <div class="glossary-item">
+                <div class="glossary-term-title">Cogito, ergo sum</div>
+                <div class="glossary-definition">"Penso, logo existo." Princípio fundamental cartesiano. Única certeza indubitável após dúvida radical.</div>
+                <div class="glossary-origin">Do latim cogito (penso) + ergo (logo) + sum (sou).</div>
+            </div>
+
+            <div class="glossary-item">
+                <div class="glossary-term-title">Imperativo Categórico</div>
+                <div class="glossary-definition">Princípio moral kantiano supremo: "Age conforme a máxima que pudesses querer que se tornasse lei universal." Incondicional, universal.</div>
+                <div class="glossary-origin">Do latim imperativus (ordem) + categoricus (absoluto, incondicional).</div>
+            </div>
+
+            <div class="glossary-item">
+                <div class="glossary-term-title">Dialética</div>
+                <div class="glossary-definition">Método de desenvolvimento do pensamento por meio de contradições. Em Hegel, processo de síntese superadora.</div>
+                <div class="glossary-origin">Do grego διαλεκτικé (dialektikê) = arte da discussão, diálogo.</div>
+            </div>
+
+            <div class="glossary-item">
+                <div class="glossary-term-title">Materialismo Histórico</div>
+                <div class="glossary-definition">Teoria marxista: condições materiais de produção determinam estrutura social, política e ideológica. História é luta de classes.</div>
+                <div class="glossary-origin">Conceito marxista combinando materialismo (prioridade da matéria/economia) e história.</div>
+            </div>
+
+            <div class="glossary-item">
+                <div class="glossary-term-title">Niilismo</div>
+                <div class="glossary-definition">Negação de todos os valores absolutos, verdades objetivas ou sentido inerente à existência. Diagnóstico nietzschiano da crise moderna.</div>
+                <div class="glossary-origin">Do latim nihil (nada). Filosofia baseada na negação de tudo.</div>
+            </div>
+
+            <div class="glossary-item">
+                <div class="glossary-term-title">Vontade de Potência</div>
+                <div class="glossary-definition">Conceito nietzschiano: força criadora e afirmativa fundamental. Impulso de todo ser vivo para superar-se, crescer, criar.</div>
+                <div class="glossary-origin">Do alemão Wille zur Macht. Impulso vital básico do ser, segundo Nietzsche.</div>
+            </div>
+
+            <div class="glossary-item">
+                <div class="glossary-term-title">Übermensch</div>
+                <div class="glossary-definition">O "Super-homem" ou "Além-do-homem" de Nietzsche. Ideal de ser humano que supera valores herdados e cria seus próprios.</div>
+                <div class="glossary-origin">Do alemão über (além, sobre) + mensch (homem, ser humano).</div>
+            </div>
+
+            <div class="glossary-item">
+                <div class="glossary-term-title">Fenomenologia</div>
+                <div class="glossary-definition">Método filosófico que estuda fenômenos tal como se apresentam à consciência, suspendendo julgamentos sobre realidade externa.</div>
+                <div class="glossary-origin">Do grego phainómenon (aquilo que aparece) + logos (razão, estudo).</div>
+            </div>
+
+            <div class="glossary-item">
+                <div class="glossary-term-title">Existencialismo</div>
+                <div class="glossary-definition">Corrente afirmando que existência precede essência. Ser humano não tem natureza predeterminada, define-se por suas escolhas.</div>
+                <div class="glossary-origin">De existentialisme (francês) = filosofia centrada na existência vivida concretamente.</div>
+            </div>
+
+            <div class="glossary-item">
+                <div class="glossary-term-title">Hermenêutica</div>
+                <div class="glossary-definition">Arte e teoria da interpretação de textos, discursos e ações humanas. Compreensão como processo fundamental.</div>
+                <div class="glossary-origin">Do grego hermenéia (interpretação). De Hermes, deus da comunicação e compreensão.</div>
+            </div>
+
+            <div class="glossary-item">
+                <div class="glossary-term-title">Biopoder</div>
+                <div class="glossary-definition">Conceito foucaultiano: formas de poder que tomam a vida biológica como objeto de controle, regulação, administração.</div>
+                <div class="glossary-origin">Bio (vida) + poder. Conceito criado por Foucault na genealogia do poder moderno.</div>
+            </div>
+
+            <div class="glossary-item">
+                <div class="glossary-term-title">Modernidade Líquida</div>
+                <div class="glossary-definition">Conceito de Bauman: condição contemporânea caracterizada por fluidez, instabilidade e impermanência das relações e identidades.</div>
+                <div class="glossary-origin">Metáfora de Bauman: líquido (fluido, sem forma fixa) em contraste com sólido (estável, duradouro).</div>
+            </div>
+        </div>
+    </main>
+
+    <!-- BIBLIOGRAFIA -->
+    <main id="bibliography" class="bibliography-page">
+        <div class="hero">
+            <h1>Bibliografia</h1>
+            <p class="subtitle">Fontes e Referências Confiáveis</p>
+        </div>
+
+        <section class="bibliography-section">
+            <h3>Obras Clássicas Primárias</h3>
+            <div class="bibliography-item">
+                <p><strong>Platão</strong> — A República (trad. Maria Helena da Rocha Pereira, Calouste Gulbenkian)</p>
+            </div>
+            <div class="bibliography-item">
+                <p><strong>Aristóteles</strong> — Ética a Nicômaco (trad. Edson Bini, Edipro)</p>
+            </div>
+            <div class="bibliography-item">
+                <p><strong>Descartes, René</strong> — Meditações sobre Filosofia Primeira (trad. J. Jeremias Xavier, Abril Cultural)</p>
+            </div>
+            <div class="bibliography-item">
+                <p><strong>Locke, John</strong> — Ensaio sobre o Entendimento Humano (trad. Anoar Aiex, Nova Cultural)</p>
+            </div>
+            <div class="bibliography-item">
+                <p><strong>Kant, Immanuel</strong> — Crítica da Razão Pura (trad. Aloísio Ruiz Sanchez, Cognitio)</p>
+            </div>
+            <div class="bibliography-item">
+                <p><strong>Hegel, G.W.F.</strong> — Fenomenologia do Espírito (trad. Paulo Meneses, Vozes)</p>
+            </div>
+            <div class="bibliography-item">
+                <p><strong>Marx, Karl</strong> — O Capital (Vol. 1, trad. Reginaldo Sant'Anna, Civilização Brasileira)</p>
+            </div>
+            <div class="bibliography-item">
+                <p><strong>Nietzsche, Friedrich</strong> — Assim Falou Zaratustra (trad. Mário da Gama Kury, Editora 34)</p>
+            </div>
+            <div class="bibliography-item">
+                <p><strong>Sartre, Jean-Paul</strong> — O Ser e o Nada (trad. Paulo Perdigão, Vozes)</p>
+            </div>
+            <div class="bibliography-item">
+                <p><strong>Wittgenstein, Ludwig</strong> — Investigações Filosóficas (trad. José Carlos Bruni, Nova Cultura)</p>
+            </div>
+        </section>
+
+        <section class="bibliography-section">
+            <h3>Interpretações e Comentários Acadêmicos</h3>
+            <div class="bibliography-item">
+                <p><strong>Chaui, Marilena</strong> — Convite à Filosofia (Ática)</p>
+            </div>
+            <div class="bibliography-item">
+                <p><strong>Reale, Giovanni & Antiseri, Dario</strong> — História da Filosofia (Paulus)</p>
+            </div>
+            <div class="bibliography-item">
+                <p><strong>Russell, Bertrand</strong> — História do Pensamento Ocidental (Best Seller)</p>
+            </div>
+            <div class="bibliography-item">
+                <p><strong>Hadot, Pierre</strong> — O que é a Filosofia Antiga? (Loyola)</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2024 A Cronologia da Filosofia. Todos os direitos reservados.</p>
+    </footer>
+
+    <script>
+        // Elementos
+        const themeToggle = document.getElementById('themeToggle');
+        const progressBar = document.getElementById('progressBar');
+        const menuToggle = document.getElementById('menuToggle');
+        const sidebar = document.getElementById('sidebar');
+        const sidebarOverlay = document.getElementById('sidebarOverlay');
+
+        // Menu Mobile
+        function toggleMenu() {
+            sidebar.classList.toggle('open');
+            sidebarOverlay.classList.toggle('active');
+        }
+
+        menuToggle.addEventListener('click', toggleMenu);
+        sidebarOverlay.addEventListener('click', toggleMenu);
+
+        // Dark Mode
+        function initTheme() {
+            const saved = localStorage.getItem('theme');
+            if (saved === 'dark' || (!saved && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                document.body.classList.add('dark-mode');
+                themeToggle.textContent = '☀️';
+            }
+        }
+
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            const isDark = document.body.classList.contains('dark-mode');
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+            themeToggle.textContent = isDark ? '☀️' : '🌙';
+        });
+
+        // Progress Bar
+        window.addEventListener('scroll', () => {
+            const scrolled = window.scrollY;
+            const height = document.documentElement.scrollHeight - window.innerHeight;
+            progressBar.style.width = (scrolled / height) * 100 + '%';
+        });
+
+        // Navigation
+        function showSection(id) {
+            const contentMain = document.getElementById('content');
+            const glossaryPage = document.getElementById('glossary');
+            const bibliographyPage = document.getElementById('bibliography');
+            
+            if (glossaryPage) glossaryPage.classList.remove('active');
+            if (bibliographyPage) bibliographyPage.classList.remove('active');
+            
+            if (id === 'content') {
+                if (contentMain) contentMain.style.display = 'block';
+                if (glossaryPage) glossaryPage.style.display = 'none';
+                if (bibliographyPage) bibliographyPage.style.display = 'none';
+            } else if (id === 'glossary') {
+                if (contentMain) contentMain.style.display = 'none';
+                if (glossaryPage) {
+                    glossaryPage.style.display = 'block';
+                    glossaryPage.classList.add('active');
+                }
+                if (bibliographyPage) bibliographyPage.style.display = 'none';
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            } else if (id === 'bibliography') {
+                if (contentMain) contentMain.style.display = 'none';
+                if (glossaryPage) glossaryPage.style.display = 'none';
+                if (bibliographyPage) {
+                    bibliographyPage.style.display = 'block';
+                    bibliographyPage.classList.add('active');
+                }
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+
+            // Fechar menu no mobile após clicar
+            if (window.innerWidth <= 768) {
+                sidebar.classList.remove('open');
+                sidebarOverlay.classList.remove('active');
+            }
+        }
+
+        function navigateToChapter(id) {
+            const el = document.getElementById(id);
+            if (el) {
+                const contentMain = document.getElementById('content');
+                if (contentMain) contentMain.style.display = 'block';
+                
+                const glossaryPage = document.getElementById('glossary');
+                const bibliographyPage = document.getElementById('bibliography');
+                if (glossaryPage) glossaryPage.style.display = 'none';
+                if (bibliographyPage) bibliographyPage.style.display = 'none';
+                
+                setTimeout(() => {
+                    const headerOffset = 80;
+                    const elementPosition = el.getBoundingClientRect().top + window.scrollY;
+                    const offsetPosition = elementPosition - headerOffset;
+                    
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth'
+                    });
+                }, 50);
+
+                // Fechar menu no mobile após clicar
+                if (window.innerWidth <= 768) {
+                    sidebar.classList.remove('open');
+                    sidebarOverlay.classList.remove('active');
+                }
+            }
+        }
+
+        function toggleReflection(btn) {
+            btn.classList.toggle('active');
+            btn.nextElementSibling.classList.toggle('active');
+        }
+
+        initTheme();
+    </script>
+
+    </div>
+
+    <style>
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-bg: #fafaf8;
+            --primary-text: #1a1a1a;
+            --secondary-text: #4a4a4a;
+            --accent: #6b4c9a;
+            --accent-light: #f5f1ff;
+            --border: #e8e8e6;
+        }
+
+        body.dark-mode {
+            --primary-bg: #1a1a1a;
+            --primary-text: #f5f5f3;
+            --secondary-text: #c0c0c0;
+            --accent: #9d7ec8;
+            --accent-light: #2d2240;
+            --border: #333333;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--primary-bg);
+            color: var(--primary-text);
+            transition: background-color 0.3s, color 0.3s;
+            line-height: 1.7;
+        }
+
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #6b4c9a, #a78bce);
+            width: 0%;
+            z-index: 1001;
+        }
+
+        header {
+            position: fixed;
+            top: 4px;
+            left: 0;
+            right: 0;
+            background: var(--primary-bg);
+            border-bottom: 1px solid var(--border);
+            padding: 1rem 2rem;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .header-title {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--primary-text);
+            padding: 0.5rem;
+            border-radius: 4px;
+        }
+
+        .menu-toggle:hover {
+            background: var(--accent-light);
+        }
+
+        .theme-toggle {
+            background: var(--border);
+            border: none;
+            padding: 0.6rem 0.8rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            color: var(--primary-text);
+        }
+
+        .theme-toggle:hover {
+            background: var(--accent-light);
+        }
+
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 65px;
+            width: 280px;
+            height: calc(100vh - 65px);
+            background: var(--primary-bg);
+            border-right: 1px solid var(--border);
+            overflow-y: auto;
+            padding: 2rem 1.5rem;
+            z-index: 999;
+            transition: transform 0.3s ease;
+        }
+
+        .sidebar-section {
+            margin-bottom: 2rem;
+        }
+
+        .sidebar-title {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        .sidebar-link {
+            display: block;
+            padding: 0.6rem 1rem;
+            margin-bottom: 0.5rem;
+            text-decoration: none;
+            color: var(--secondary-text);
+            border-radius: 4px;
+            transition: all 0.3s;
+            font-size: 0.95rem;
+            cursor: pointer;
+        }
+
+        .sidebar-link:hover {
+            background: var(--accent-light);
+            color: var(--accent);
+        }
+
+        main {
+            margin-left: 280px;
+            margin-top: 65px;
+            padding: 4rem;
+            max-width: 900px;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 3rem 0;
+            margin-bottom: 4rem;
+        }
+
+        .hero h1 {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .hero .subtitle {
+            font-size: 1.3rem;
+            color: var(--secondary-text);
+            margin-bottom: 2rem;
+        }
+
+        /* Sumário Estilizado */
+        .toc-container {
+            background: var(--accent-light);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 2rem;
+            margin: 2rem auto 4rem;
+            max-width: 700px;
+            text-align: left;
+        }
+
+        .toc-title {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 1.5rem;
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid var(--accent);
+            padding-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .toc-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
+        .toc-item {
+            display: block;
+            text-decoration: none;
+            color: var(--primary-text);
+            font-size: 0.95rem;
+            padding: 0.4rem 0.8rem;
+            border-radius: 4px;
+            transition: background 0.2s;
+            cursor: pointer;
+        }
+
+        .toc-item:hover {
+            background: var(--border);
+            color: var(--accent);
+        }
+
+        .chapter {
+            margin-bottom: 4rem;
+            padding-bottom: 3rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .chapter-number {
+            font-size: 0.85rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        .chapter h2 {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 2rem;
+            margin: 0.5rem 0 1.5rem;
+        }
+
+        .chapter-meta {
+            font-size: 0.9rem;
+            color: var(--secondary-text);
+            background: var(--accent-light);
+            padding: 1rem;
+            border-radius: 6px;
+            margin-bottom: 1.5rem;
+            border-left: 3px solid var(--accent);
+        }
+
+        .chapter-content {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 1.05rem;
+        }
+
+        .chapter-content p {
+            margin-bottom: 1.5rem;
+        }
+
+        .reflection-section {
+            background: var(--accent-light);
+            border-radius: 8px;
+            margin-top: 2rem;
+            overflow: hidden;
+        }
+
+        .reflection-header {
+            padding: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--accent-light);
+            border: none;
+            width: 100%;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--accent);
+            font-family: 'Inter', sans-serif;
+        }
+
+        .reflection-header:hover {
+            background: var(--border);
+        }
+
+        .reflection-icon {
+            transition: transform 0.3s;
+        }
+
+        .reflection-header.active .reflection-icon {
+            transform: rotate(180deg);
+        }
+
+        .reflection-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .reflection-content.active {
+            max-height: 1000px;
+        }
+
+        .reflection-text {
+            padding: 1.5rem;
+            background: var(--primary-bg);
+            color: var(--secondary-text);
+        }
+
+        .glossary-page, .bibliography-page {
+            display: none;
+            margin-left: 280px;
+            margin-top: 65px;
+            padding: 4rem;
+            max-width: 900px;
+        }
+
+        .glossary-page.active, .bibliography-page.active {
+            display: block;
+        }
+
+        .glossary-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .glossary-item {
+            background: var(--accent-light);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-left: 3px solid var(--accent);
+        }
+
+        .glossary-term-title {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 1.2rem;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .glossary-definition {
+            color: var(--secondary-text);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 0.8rem;
+        }
+
+        .glossary-origin {
+            font-size: 0.85rem;
+            color: var(--secondary-text);
+            font-style: italic;
+            border-top: 1px solid var(--border);
+            padding-top: 0.8rem;
+        }
+
+        .bibliography-item {
+            background: var(--accent-light);
+            padding: 1.5rem;
+            border-radius: 6px;
+            margin-bottom: 1rem;
+            border-left: 3px solid var(--accent);
+        }
+
+        .bibliography-item p {
+            color: var(--secondary-text);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        .bibliography-section h3 {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 1.2rem;
+            color: var(--accent);
+            margin: 2rem 0 1rem 0;
+            border-bottom: 2px solid var(--border);
+            padding-bottom: 0.5rem;
+        }
+
+        footer {
+            margin-left: 280px;
+            padding: 3rem 4rem;
+            border-top: 1px solid var(--border);
+            text-align: center;
+            color: var(--secondary-text);
+            font-size: 0.9rem;
+        }
+
+        /* Overlay para mobile */
+        .sidebar-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 998;
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+
+            .sidebar {
+                transform: translateX(-100%);
+            }
+
+            .sidebar.open {
+                transform: translateX(0);
+            }
+
+            .sidebar-overlay.active {
+                display: block;
+            }
+
+            main, .glossary-page, .bibliography-page {
+                margin-left: 0;
+                padding: 2rem 1.5rem;
+            }
+
+            footer {
+                margin-left: 0;
+                padding: 2rem 1.5rem;
+            }
+
+            header {
+                padding: 1rem 1.5rem;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .chapter h2 {
+                font-size: 1.5rem;
+            }
+
+            .glossary-container {
+                grid-template-columns: 1fr;
+            }
+
+            .toc-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--primary-bg);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--border);
+            border-radius: 5px;
+        }
+    
+    </style>
+
+    <script>
+        function abrirLivro() {
+            document.getElementById('deliveryPage').classList.add('hidden');
+            document.getElementById('bookPage').classList.add('active');
+            document.getElementById('backBtn').classList.add('show');
+            window.scrollTo(0, 0);
+            try {
+                
+        // Elementos
+        const themeToggle = document.getElementById('themeToggle');
+        const progressBar = document.getElementById('progressBar');
+        const menuToggle = document.getElementById('menuToggle');
+        const sidebar = document.getElementById('sidebar');
+        const sidebarOverlay = document.getElementById('sidebarOverlay');
+
+        // Menu Mobile
+        function toggleMenu() {
+            sidebar.classList.toggle('open');
+            sidebarOverlay.classList.toggle('active');
+        }
+
+        menuToggle.addEventListener('click', toggleMenu);
+        sidebarOverlay.addEventListener('click', toggleMenu);
+
+        // Dark Mode
+        function initTheme() {
+            const saved = localStorage.getItem('theme');
+            if (saved === 'dark' || (!saved && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                document.body.classList.add('dark-mode');
+                themeToggle.textContent = '☀️';
+            }
+        }
+
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            const isDark = document.body.classList.contains('dark-mode');
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+            themeToggle.textContent = isDark ? '☀️' : '🌙';
+        });
+
+        // Progress Bar
+        window.addEventListener('scroll', () => {
+            const scrolled = window.scrollY;
+            const height = document.documentElement.scrollHeight - window.innerHeight;
+            progressBar.style.width = (scrolled / height) * 100 + '%';
+        });
+
+        // Navigation
+        function showSection(id) {
+            const contentMain = document.getElementById('content');
+            const glossaryPage = document.getElementById('glossary');
+            const bibliographyPage = document.getElementById('bibliography');
+            
+            if (glossaryPage) glossaryPage.classList.remove('active');
+            if (bibliographyPage) bibliographyPage.classList.remove('active');
+            
+            if (id === 'content') {
+                if (contentMain) contentMain.style.display = 'block';
+                if (glossaryPage) glossaryPage.style.display = 'none';
+                if (bibliographyPage) bibliographyPage.style.display = 'none';
+            } else if (id === 'glossary') {
+                if (contentMain) contentMain.style.display = 'none';
+                if (glossaryPage) {
+                    glossaryPage.style.display = 'block';
+                    glossaryPage.classList.add('active');
+                }
+                if (bibliographyPage) bibliographyPage.style.display = 'none';
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            } else if (id === 'bibliography') {
+                if (contentMain) contentMain.style.display = 'none';
+                if (glossaryPage) glossaryPage.style.display = 'none';
+                if (bibliographyPage) {
+                    bibliographyPage.style.display = 'block';
+                    bibliographyPage.classList.add('active');
+                }
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+
+            // Fechar menu no mobile após clicar
+            if (window.innerWidth <= 768) {
+                sidebar.classList.remove('open');
+                sidebarOverlay.classList.remove('active');
+            }
+        }
+
+        function navigateToChapter(id) {
+            const el = document.getElementById(id);
+            if (el) {
+                const contentMain = document.getElementById('content');
+                if (contentMain) contentMain.style.display = 'block';
+                
+                const glossaryPage = document.getElementById('glossary');
+                const bibliographyPage = document.getElementById('bibliography');
+                if (glossaryPage) glossaryPage.style.display = 'none';
+                if (bibliographyPage) bibliographyPage.style.display = 'none';
+                
+                setTimeout(() => {
+                    const headerOffset = 80;
+                    const elementPosition = el.getBoundingClientRect().top + window.scrollY;
+                    const offsetPosition = elementPosition - headerOffset;
+                    
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth'
+                    });
+                }, 50);
+
+                // Fechar menu no mobile após clicar
+                if (window.innerWidth <= 768) {
+                    sidebar.classList.remove('open');
+                    sidebarOverlay.classList.remove('active');
+                }
+            }
+        }
+
+        function toggleReflection(btn) {
+            btn.classList.toggle('active');
+            btn.nextElementSibling.classList.toggle('active');
+        }
+
+        initTheme();
+    
+            } catch(e) {}
+        }
+
+        function voltarParaEntrega() {
+            document.getElementById('deliveryPage').classList.remove('hidden');
+            document.getElementById('bookPage').classList.remove('active');
+            document.getElementById('backBtn').classList.remove('show');
+            window.scrollTo(0, 0);
+        }
+
+        window.addEventListener('load', function() {
+            try {
+                
+        // Elementos
+        const themeToggle = document.getElementById('themeToggle');
+        const progressBar = document.getElementById('progressBar');
+        const menuToggle = document.getElementById('menuToggle');
+        const sidebar = document.getElementById('sidebar');
+        const sidebarOverlay = document.getElementById('sidebarOverlay');
+
+        // Menu Mobile
+        function toggleMenu() {
+            sidebar.classList.toggle('open');
+            sidebarOverlay.classList.toggle('active');
+        }
+
+        menuToggle.addEventListener('click', toggleMenu);
+        sidebarOverlay.addEventListener('click', toggleMenu);
+
+        // Dark Mode
+        function initTheme() {
+            const saved = localStorage.getItem('theme');
+            if (saved === 'dark' || (!saved && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                document.body.classList.add('dark-mode');
+                themeToggle.textContent = '☀️';
+            }
+        }
+
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            const isDark = document.body.classList.contains('dark-mode');
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+            themeToggle.textContent = isDark ? '☀️' : '🌙';
+        });
+
+        // Progress Bar
+        window.addEventListener('scroll', () => {
+            const scrolled = window.scrollY;
+            const height = document.documentElement.scrollHeight - window.innerHeight;
+            progressBar.style.width = (scrolled / height) * 100 + '%';
+        });
+
+        // Navigation
+        function showSection(id) {
+            const contentMain = document.getElementById('content');
+            const glossaryPage = document.getElementById('glossary');
+            const bibliographyPage = document.getElementById('bibliography');
+            
+            if (glossaryPage) glossaryPage.classList.remove('active');
+            if (bibliographyPage) bibliographyPage.classList.remove('active');
+            
+            if (id === 'content') {
+                if (contentMain) contentMain.style.display = 'block';
+                if (glossaryPage) glossaryPage.style.display = 'none';
+                if (bibliographyPage) bibliographyPage.style.display = 'none';
+            } else if (id === 'glossary') {
+                if (contentMain) contentMain.style.display = 'none';
+                if (glossaryPage) {
+                    glossaryPage.style.display = 'block';
+                    glossaryPage.classList.add('active');
+                }
+                if (bibliographyPage) bibliographyPage.style.display = 'none';
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            } else if (id === 'bibliography') {
+                if (contentMain) contentMain.style.display = 'none';
+                if (glossaryPage) glossaryPage.style.display = 'none';
+                if (bibliographyPage) {
+                    bibliographyPage.style.display = 'block';
+                    bibliographyPage.classList.add('active');
+                }
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+
+            // Fechar menu no mobile após clicar
+            if (window.innerWidth <= 768) {
+                sidebar.classList.remove('open');
+                sidebarOverlay.classList.remove('active');
+            }
+        }
+
+        function navigateToChapter(id) {
+            const el = document.getElementById(id);
+            if (el) {
+                const contentMain = document.getElementById('content');
+                if (contentMain) contentMain.style.display = 'block';
+                
+                const glossaryPage = document.getElementById('glossary');
+                const bibliographyPage = document.getElementById('bibliography');
+                if (glossaryPage) glossaryPage.style.display = 'none';
+                if (bibliographyPage) bibliographyPage.style.display = 'none';
+                
+                setTimeout(() => {
+                    const headerOffset = 80;
+                    const elementPosition = el.getBoundingClientRect().top + window.scrollY;
+                    const offsetPosition = elementPosition - headerOffset;
+                    
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth'
+                    });
+                }, 50);
+
+                // Fechar menu no mobile após clicar
+                if (window.innerWidth <= 768) {
+                    sidebar.classList.remove('open');
+                    sidebarOverlay.classList.remove('active');
+                }
+            }
+        }
+
+        function toggleReflection(btn) {
+            btn.classList.toggle('active');
+            btn.nextElementSibling.classList.toggle('active');
+        }
+
+        initTheme();
+    
+            } catch(e) {}
+        });
+    </script>
+</body>
+</html>
