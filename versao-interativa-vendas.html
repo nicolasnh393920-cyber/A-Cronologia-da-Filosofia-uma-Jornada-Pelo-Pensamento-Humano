@@ -328,7 +328,7 @@
             <h3>Investimento em Conhecimento</h3>
             <div class="price-value">R$ 27,90</div>
             <p class="price-info">Acesso imediato após o pagamento</p>
-            <button class="cta-button" onclick="comprarKiwify()">🛒 Comprar Agora - HTML</button>
+            <button class="cta-button" onclick="comprarMercadoPago()">🛒 Comprar Agora - HTML</button>
             <br>
             <a href="index.html" class="back-link">← Voltar para a página principal</a>
         </div>
@@ -338,8 +338,14 @@
     <footer>
         <div class="footer-content">
             <div class="contact-info">
-                <div>📧 <a href="/cdn-cgi/l/email-protection#f39d9a9098899a9d9c83969db3949e929a9fdd909c9e"><span class="__cf_email__" data-cfemail="4d23242e26372423223d28230d2a202c2421632e2220">[email&#160;protected]</span></a></div>
-                <div>📱 <a href="https://wa.me/5511913668489" target="_blank">(11) 91366-8489</a></div>
+                <div class="contact-item">
+                    <span>📧</span>
+                    <a href="mailto:nickzinopen@gmail.com">nickzinopen@gmail.com</a>
+                </div>
+                <div class="contact-item">
+                    <span>📱</span>
+                    <a href="https://wa.me/5511913668489" target="_blank">(11) 91366-8489</a>
+                </div>
             </div>
             <div class="copyright">
                 © 2026 A Cronologia da Filosofia. Todos os direitos reservados.
@@ -347,10 +353,11 @@
         </div>
     </footer>
 
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-        function comprarKiwify() {
-            // SUBSTITUA PELA URL DO SEU PRODUTO HTML NO KIWIFY
-            const linkKiwify = 'https://seu-link-kiwify-html.com';
-            
-            if (linkKiwify === 'https://seu-link-kiwify-html.com') {
-                alert(
+    <script>
+        function comprarMercadoPago() {
+            const linkMP = 'https://mpago.li/2xtueJw';
+            window.open(linkMP, '_blank');
+        }
+    </script>
+</body>
+</html>
