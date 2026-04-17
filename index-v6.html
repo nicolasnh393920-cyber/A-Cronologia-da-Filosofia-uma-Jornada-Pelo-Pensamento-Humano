@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A Cronologia da Filosofia - Ebook completo com 25 capítulos explorando a história da filosofia ocidental. Disponível em PDF e HTML interativo.">
+    <meta name="keywords" content="filosofia, ebook, história da filosofia, educação, conhecimento">
+    <meta name="author" content="Nicolas H. de J. Silva">
+    <title>A Cronologia da Filosofia - Ebook</title>
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital@0;1&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #fafaf8;
+            color: #1a1a1a;
+            line-height: 1.6;
+        }
+
+        /* UTILS */
+        .hidden {
+            display: none !important;
+        }
+
+        /* COMMON STYLES FOR ALL PAGES */
+        header {
+            padding: 1.5rem 2rem;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            color: white;
+        }
+
+        header h1 {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        header p {
+            font-size: 1.1rem;
+            opacity: 0.95;
+            font-weight: 300;
+        }
+
+        .hero {
+            padding: 5rem 2rem;
+            text-align: center;
+            min-height: 400px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+        }
+
+        .hero h2 {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+            font-weight: 700;
+        }
+
+        .hero .subtitle {
+            font-size: 1.4rem;
+            margin-bottom: 1.5rem;
+            opacity: 0.9;
+            max-width: 700px;
+        }
+
+        .hero .description {
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            opacity: 0.85;
+            line-height: 1.8;
+        }
+
+        .content {
+            padding: 4rem 2rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .content h3 {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            color: #6b4c9a;
+        }
+
+        /* BUTTONS */
+        .btn, .cta-button {
+            padding: 1.2rem 2rem;
+            font-size: 1.1rem;
+            font-weight: 700;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .cta-button {
+            background-color: #d4af37;
+            color: #1a1a1a;
+            padding: 1.5rem 3rem;
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+        }
+
+        .cta-button:hover {
+            background-color: #e8c547;
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(212, 175, 55, 0.4);
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 1rem;
+            color: inherit;
+            text-decoration: none;
+            font-weight: 600;
+            transition: opacity 0.3s;
+            cursor: pointer;
+        }
+
+        .back-link:hover {
+            opacity: 0.7;
+        }
+
+        /* PAGE: HOME (INDEX) */
+        #page-home header { background: linear-gradient(135deg, #6b4c9a 0%, #4a3570 100%); }
+        #page-home .hero { background: linear-gradient(135deg, rgba(107, 76, 154, 0.95) 0%, rgba(74, 53, 112, 0.95) 100%), url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><defs><pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/></pattern></defs><rect width="1200" height="600" fill="url(%23grid)"/></svg>'); }
+        
+        .benefits { padding: 5rem 2rem; background-color: #fafaf8; }
+        .benefits h3 { font-family: 'Libre Baskerville', serif; text-align: center; font-size: 2.5rem; margin-bottom: 3rem; color: #6b4c9a; }
+        .benefits-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2.5rem; max-width: 1200px; margin: 0 auto; }
+        .benefit-card { background: white; border-radius: 12px; padding: 2.5rem; text-align: center; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08); transition: all 0.3s ease; border-top: 4px solid #6b4c9a; }
+        .benefit-card:hover { transform: translateY(-10px); box-shadow: 0 12px 35px rgba(107, 76, 154, 0.15); }
+        .benefit-card.combo { border-top-color: #d4af37; background: linear-gradient(135deg, #fafaf8 0%, #f5f1ff 100%); position: relative; overflow: hidden; }
+        .benefit-card.combo::before { content: "MELHOR OFERTA"; position: absolute; top: -35px; right: -45px; background: #d4af37; color: #1a1a1a; padding: 0.5rem 4rem; transform: rotate(45deg); font-weight: 700; font-size: 0.85rem; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); }
+        .benefit-icon { font-size: 3.5rem; margin-bottom: 1rem; }
+        .benefit-card h4 { font-family: 'Libre Baskerville', serif; font-size: 1.8rem; margin-bottom: 1rem; color: #1a1a1a; }
+        .benefit-card .price { font-size: 2.2rem; font-weight: 700; color: #6b4c9a; margin: 1rem 0; }
+        .benefit-card.combo .price { color: #d4af37; }
+        .benefit-list { text-align: left; margin: 1.5rem 0; }
+        .benefit-list li { list-style: none; padding: 0.6rem 0; color: #4a4a4a; font-size: 0.95rem; border-bottom: 1px solid #e8e8e6; }
+        .benefit-list li::before { content: "✓ "; color: #6b4c9a; font-weight: 700; margin-right: 0.5rem; }
+        .benefit-card.combo .benefit-list li::before { color: #d4af37; }
+
+        .cta-section { padding: 4rem 2rem; background: linear-gradient(135deg, #6b4c9a 0%, #4a3570 100%); text-align: center; }
+        .cta-section h3 { font-family: 'Libre Baskerville', serif; font-size: 2.2rem; color: white; margin-bottom: 2.5rem; }
+        .buttons-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; max-width: 1000px; margin: 0 auto; }
+        .btn-pdf { background-color: #4a90e2; color: white; }
+        .btn-html { background-color: #9d7ec8; color: white; }
+        .btn-combo { background-color: #d4af37; color: #1a1a1a; font-size: 1.2rem; padding: 1.4rem 2.5rem; }
+
+        /* PAGE: PDF */
+        #page-pdf header { background: linear-gradient(135deg, #4a90e2 0%, #357abd 100%); }
+        #page-pdf .hero { background: linear-gradient(135deg, rgba(74, 144, 226, 0.95) 0%, rgba(53, 122, 189, 0.95) 100%); }
+        .features-box { background: white; border-radius: 12px; padding: 2rem; margin-bottom: 2rem; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08); border-left: 4px solid #4a90e2; }
+        .features-box h4 { font-size: 1.3rem; margin-bottom: 1.5rem; color: #1a1a1a; }
+        .features-box ul { list-style: none; }
+        .features-box li { padding: 0.8rem 0; color: #4a4a4a; font-size: 1rem; border-bottom: 1px solid #e8e8e6; }
+        .features-box li::before { content: "✓ "; color: #4a90e2; font-weight: 700; margin-right: 0.8rem; }
+        .price-section-box { background: linear-gradient(135deg, #4a90e2 0%, #357abd 100%); color: white; padding: 3rem 2rem; border-radius: 12px; text-align: center; margin-bottom: 2rem; }
+        .price-section-box h3 { font-family: 'Libre Baskerville', serif; font-size: 2.5rem; margin-bottom: 1rem; color: white; }
+        .price-value-big { font-size: 3.5rem; font-weight: 700; margin-bottom: 1.5rem; }
+
+        /* PAGE: HTML */
+        #page-html header { background: linear-gradient(135deg, #9d7ec8 0%, #7d5fa8 100%); }
+        #page-html .hero { background: linear-gradient(135deg, rgba(157, 126, 200, 0.95) 0%, rgba(125, 95, 168, 0.95) 100%); }
+        .features-box.html-box { border-left-color: #9d7ec8; }
+        .features-box.html-box li::before { color: #9d7ec8; }
+        .price-section-box.html-price { background: linear-gradient(135deg, #9d7ec8 0%, #7d5fa8 100%); }
+
+        /* PAGE: COMBO */
+        #page-combo header { background: linear-gradient(135deg, #d4af37 0%, #b8941f 100%); color: #1a1a1a; }
+        #page-combo .hero { background: linear-gradient(135deg, rgba(212, 175, 55, 0.95) 0%, rgba(184, 148, 31, 0.95) 100%); color: #1a1a1a; }
+        .hero .badge-combo { display: inline-block; background: rgba(255, 255, 255, 0.3); border: 2px solid #1a1a1a; color: #1a1a1a; padding: 0.7rem 1.5rem; border-radius: 50px; font-weight: 700; margin-top: 1rem; font-size: 1.1rem; }
+        .comparison { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; margin-bottom: 3rem; }
+        .package { background: white; border-radius: 12px; padding: 2rem; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08); border-top: 4px solid #d4af37; text-align: center; }
+        .package h4 { font-size: 1.5rem; margin-bottom: 1rem; color: #1a1a1a; }
+        .package-icon { font-size: 2.5rem; margin-bottom: 1rem; }
+        .package ul { list-style: none; text-align: left; margin-bottom: 1.5rem; }
+        .package li { padding: 0.6rem 0; color: #4a4a4a; font-size: 0.95rem; border-bottom: 1px solid #e8e8e6; }
+        .package li::before { content: "✓ "; color: #d4af37; font-weight: 700; margin-right: 0.5rem; }
+        .features-combo { background: linear-gradient(135deg, #f5f1ff 0%, #fafaf8 100%); border-radius: 12px; padding: 2rem; margin-bottom: 2rem; border-left: 4px solid #d4af37; }
+        .features-combo li { list-style: none; padding: 0.8rem 0; color: #4a4a4a; border-bottom: 1px solid #e8e8e6; }
+        .features-combo li::before { content: "✨ "; margin-right: 0.8rem; }
+        .price-section-box.combo-price { background: linear-gradient(135deg, #d4af37 0%, #b8941f 100%); color: #1a1a1a; }
+        .price-section-box.combo-price h3 { color: #1a1a1a; }
+        .price-comparison { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; margin-bottom: 2rem; font-size: 0.95rem; }
+        .price-item { background: rgba(255, 255, 255, 0.3); padding: 1rem; border-radius: 8px; }
+        .price-item.savings { background: rgba(26, 26, 26, 0.1); border: 2px solid #1a1a1a; }
+
+        /* FOOTER */
+        footer { background-color: #1a1a1a; color: #c0c0c0; padding: 2rem; text-align: center; font-size: 0.9rem; }
+        .footer-content { max-width: 1200px; margin: 0 auto; }
+        .contact-info { margin-bottom: 1.5rem; display: flex; flex-direction: column; gap: 0.8rem; align-items: center; }
+        .contact-item { display: flex; align-items: center; justify-content: center; gap: 0.5rem; }
+        .contact-item a { color: #d4af37; text-decoration: none; transition: color 0.3s; }
+        .social-links { display: flex; justify-content: center; gap: 1.5rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
+        .social-link { display: inline-flex; align-items: center; gap: 0.5rem; color: #d4af37; text-decoration: none; transition: all 0.3s; font-weight: 600; }
+        .copyright { border-top: 1px solid #333; padding-top: 1rem; margin-top: 1rem; color: #888; }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            header h1 { font-size: 2rem; }
+            .hero h2 { font-size: 2rem; }
+            .price-value-big { font-size: 2.5rem; }
+            .cta-button { padding: 1.2rem 2rem; font-size: 1.1rem; }
+            .comparison, .price-comparison { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- PAGE: HOME -->
+    <div id="page-home">
+        <header>
+            <h1>A Cronologia da Filosofia</h1>
+            <p>Ebook completo com 25 capítulos explorando a história da filosofia ocidental.</p>
+        </header>
+
+        <section class="hero">
+            <h2>Descubra a Sabedoria dos Séculos</h2>
+            <p class="subtitle">Uma jornada profunda e acessível pela história do pensamento humano.</p>
+            <p class="description">Explore as ideias que moldaram o mundo, desde os pré-socráticos até a filosofia contemporânea, em um guia completo e estruturado.</p>
+            <p class="author">Por Nicolas H. de J. Silva</p>
+            <div class="badge">Disponível em PDF e HTML Interativo</div>
+        </section>
+
+        <section class="benefits">
+            <h3>Escolha sua Versão</h3>
+            <div class="benefits-container">
+                <!-- PDF Card -->
+                <div class="benefit-card">
+                    <div class="benefit-icon">📄</div>
+                    <h4>Versão PDF</h4>
+                    <div class="price">R$ 17,90</div>
+                    <ul class="benefit-list">
+                        <li>Leitura offline completa</li>
+                        <li>Compatível com e-readers</li>
+                        <li>Formato universal estático</li>
+                        <li>Ideal para leitura tradicional</li>
+                    </ul>
+                    <button class="btn btn-pdf" onclick="showPage('pdf')">Ver Detalhes - PDF</button>
+                </div>
+
+                <!-- HTML Card -->
+                <div class="benefit-card">
+                    <div class="benefit-icon">🌐</div>
+                    <h4>HTML Interativo</h4>
+                    <div class="price">R$ 27,90</div>
+                    <ul class="benefit-list">
+                        <li>Menu responsivo mobile</li>
+                        <li>Modo claro/escuro</li>
+                        <li>Sumário interativo</li>
+                        <li>Experiência moderna</li>
+                    </ul>
+                    <button class="btn btn-html" onclick="showPage('html')">Ver Detalhes - HTML</button>
+                </div>
+
+                <!-- COMBO Card -->
+                <div class="benefit-card combo">
+                    <div class="benefit-icon">🎁</div>
+                    <h4>Combo Completo</h4>
+                    <div class="price">R$ 34,90</div>
+                    <ul class="benefit-list">
+                        <li>✨ PDF + HTML (Ambos)</li>
+                        <li>✨ Máxima flexibilidade</li>
+                        <li>✨ Melhor custo-benefício</li>
+                        <li>✨ Economize R$ 10,90!</li>
+                    </ul>
+                    <button class="btn btn-combo" onclick="showPage('combo')">Ver Detalhes - Combo</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta-section">
+            <h3>Pronto para começar sua jornada filosófica?</h3>
+            <div class="buttons-container">
+                <button class="btn btn-pdf" onclick="showPage('pdf')">📄 PDF - R$ 17,90</button>
+                <button class="btn btn-html" onclick="showPage('html')">🌐 HTML - R$ 27,90</button>
+                <button class="btn btn-combo" onclick="showPage('combo')">🎁 Combo - R$ 34,90</button>
+            </div>
+        </section>
+    </div>
+
+    <!-- PAGE: PDF -->
+    <div id="page-pdf" class="hidden">
+        <header>
+            <h1>A Cronologia da Filosofia</h1>
+            <p>Versão PDF - Estática</p>
+        </header>
+        <section class="hero">
+            <h2>📄 Versão PDF</h2>
+            <p class="subtitle">Leitura Offline Completa</p>
+            <p class="description">Acesse a obra completa em formato PDF. Leia em qualquer dispositivo, a qualquer hora, sem necessidade de conexão com a internet.</p>
+        </section>
+        <section class="content">
+            <h3>Por que escolher a versão PDF?</h3>
+            <div class="features-box">
+                <h4>Benefícios Principais</h4>
+                <ul>
+                    <li>Leitura offline sem necessidade de internet</li>
+                    <li>Compatível com computadores, tablets e e-readers</li>
+                    <li>Formato universal e seguro</li>
+                    <li>25 capítulos completos sobre a história da filosofia</li>
+                    <li>Glossário com 22 termos filosóficos essenciais</li>
+                    <li>Bibliografia completa com referências confiáveis</li>
+                </ul>
+            </div>
+            <div class="price-section-box">
+                <h3>Investimento em Conhecimento</h3>
+                <div class="price-value-big">R$ 17,90</div>
+                <p>Acesso imediato após o pagamento</p>
+                <a href="https://pay.kiwify.com.br/Yjf2DZJ" class="cta-button" target="_blank">🛒 Comprar Agora - PDF</a>
+                <br>
+                <span class="back-link" onclick="showPage('home')">← Voltar para a página principal</span>
+            </div>
+        </section>
+    </div>
+
+    <!-- PAGE: HTML -->
+    <div id="page-html" class="hidden">
+        <header>
+            <h1>A Cronologia da Filosofia</h1>
+            <p>Versão HTML - Interativa</p>
+        </header>
+        <section class="hero">
+            <h2>🌐 Versão HTML Interativa</h2>
+            <p class="subtitle">Experiência Moderna de Leitura</p>
+            <p class="description">Mergulhe na experiência interativa completa. Com menu responsivo, modo claro/escuro, sumário navegável e muito mais.</p>
+        </section>
+        <section class="content">
+            <h3>Por que escolher a versão HTML?</h3>
+            <div class="features-box html-box">
+                <h4>Recursos Exclusivos</h4>
+                <ul>
+                    <li>Menu hambúrguer responsivo para mobile</li>
+                    <li>Sumário interativo com navegação rápida</li>
+                    <li>Modo claro/escuro para conforto visual</li>
+                    <li>Barra de progresso de leitura em tempo real</li>
+                    <li>Seções de reflexão expansíveis</li>
+                    <li>Totalmente responsivo (desktop, tablet, mobile)</li>
+                </ul>
+            </div>
+            <div class="price-section-box html-price">
+                <h3>Investimento em Conhecimento</h3>
+                <div class="price-value-big">R$ 27,90</div>
+                <p>Acesso imediato após o pagamento</p>
+                <a href="https://pay.kiwify.com.br/sGijH2Z" class="cta-button" target="_blank">🛒 Comprar Agora - HTML</a>
+                <br>
+                <span class="back-link" onclick="showPage('home')">← Voltar para a página principal</span>
+            </div>
+        </section>
+    </div>
+
+    <!-- PAGE: COMBO -->
+    <div id="page-combo" class="hidden">
+        <header>
+            <h1>A Cronologia da Filosofia</h1>
+            <p>Combo Completo - PDF + HTML</p>
+        </header>
+        <section class="hero">
+            <h2>🎁 Combo Completo</h2>
+            <p class="subtitle">PDF + HTML Interativo</p>
+            <p class="description">Obtenha ambas as versões e aproveite a máxima flexibilidade. Leia offline ou online, escolha o formato que preferir.</p>
+            <div class="badge-combo">💰 Economize R$ 10,90!</div>
+        </section>
+        <section class="content">
+            <h3>O Melhor dos Dois Mundos</h3>
+            <div class="comparison">
+                <div class="package">
+                    <div class="package-icon">📄</div>
+                    <h4>PDF Estático</h4>
+                    <ul>
+                        <li>Leitura offline</li>
+                        <li>Universal e seguro</li>
+                        <li>Ideal para tablets</li>
+                    </ul>
+                </div>
+                <div class="package">
+                    <div class="package-icon">🌐</div>
+                    <h4>HTML Interativo</h4>
+                    <ul>
+                        <li>Menu responsivo</li>
+                        <li>Modo claro/escuro</li>
+                        <li>Navegação rápida</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="features-combo">
+                <h4>Tudo Incluído no Combo</h4>
+                <ul>
+                    <li>25 capítulos completos sobre a história da filosofia</li>
+                    <li>Glossário e Bibliografia completa</li>
+                    <li>Acesso a ambas as versões (PDF + HTML)</li>
+                    <li>Suporte por email e WhatsApp</li>
+                </ul>
+            </div>
+            <div class="price-section-box combo-price">
+                <h3>Investimento em Conhecimento</h3>
+                <div class="price-comparison">
+                    <div class="price-item">
+                        <div class="label">PDF</div>
+                        <div class="value">R$ 17,90</div>
+                    </div>
+                    <div class="price-item">
+                        <div class="label">HTML</div>
+                        <div class="value">R$ 27,90</div>
+                    </div>
+                    <div class="price-item savings">
+                        <div class="label">Total Separado</div>
+                        <div class="value">R$ 45,80</div>
+                    </div>
+                </div>
+                <div class="price-value-big">R$ 34,90</div>
+                <p>Acesso imediato • Ambas as versões incluídas</p>
+                <a href="https://pay.kiwify.com.br/v9VUe7J" class="cta-button" target="_blank">🛒 Comprar Agora - Combo</a>
+                <br>
+                <span class="back-link" onclick="showPage('home')">← Voltar para a página principal</span>
+            </div>
+        </section>
+    </div>
+
+    <!-- FOOTER (SHARED) -->
+    <footer>
+        <div class="footer-content">
+            <div class="contact-info">
+                <div class="contact-item">
+                    <span>📧</span>
+                    <a href="mailto:nickzinopen@gmail.com">nickzinopen@gmail.com</a>
+                </div>
+                <div class="contact-item">
+                    <span>📱</span>
+                    <a href="https://wa.me/5511913668489" target="_blank">(11) 91366-8489</a>
+                </div>
+            </div>
+
+            <div class="social-links">
+                <a href="https://instagram.com/nick.et.logos" target="_blank" class="social-link">
+                    <span>📷 Instagram</span>
+                </a>
+                <a href="https://tiktok.com/@nick.et.logos" target="_blank" class="social-link">
+                    <span>🎵 TikTok</span>
+                </a>
+            </div>
+
+            <div class="copyright">
+                © 2026 A Cronologia da Filosofia. Todos os direitos reservados.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function showPage(pageId) {
+            // Esconde todas as páginas
+            document.getElementById('page-home').classList.add('hidden');
+            document.getElementById('page-pdf').classList.add('hidden');
+            document.getElementById('page-html').classList.add('hidden');
+            document.getElementById('page-combo').classList.add('hidden');
+
+            // Mostra a página solicitada
+            document.getElementById('page-' + pageId).classList.remove('hidden');
+            
+            // Rola para o topo
+            window.scrollTo(0, 0);
+        }
+
+
+    </script>
+</body>
+</html>
